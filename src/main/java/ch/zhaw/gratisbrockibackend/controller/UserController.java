@@ -4,11 +4,11 @@ import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("api/v1/users")
 @RestController
 public class UserController {
 
@@ -19,9 +19,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/api/v1/users")
+    @GetMapping
     public List<User> getUsers(){
         return userService.getUsers();
+    }
+
+    @PostMapping
+    public void addNewUser(@RequestBody User user){
+        userService.addNewUser(user);
     }
 
 }

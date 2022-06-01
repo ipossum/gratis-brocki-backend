@@ -1,6 +1,7 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
 import ch.zhaw.gratisbrockibackend.domain.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,13 +10,14 @@ import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "User")
+@Entity
+@JsonIgnoreProperties({ "password", "items" }) // quick fix until we set up DTOs
 public class User extends BaseEntity{
 
     private String username;
     private String email;
     private String phoneNumber;
-    private String passwordHash;
+    private String password;
     private Role role;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
@@ -43,10 +45,10 @@ public class User extends BaseEntity{
     }
 
     public String getPassword() {
-        return passwordHash;
+        return password;
     }
-    public void setPassword(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<Item> getItems() {
@@ -70,6 +72,7 @@ public class User extends BaseEntity{
     @Override
     public String toString(){
         return "User{" +
+                "id: " + id + '\'' +
                 "username: " + username + '\'' +
                 "email: " + email + '\'' +
                 "phone number: " + phoneNumber + '\'' +
