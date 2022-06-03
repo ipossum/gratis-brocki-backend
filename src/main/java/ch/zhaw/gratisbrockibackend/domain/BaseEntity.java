@@ -1,5 +1,8 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -10,6 +13,8 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
 
+@Getter
+@Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
@@ -37,48 +42,6 @@ public abstract class BaseEntity {
 
     @Column
     protected String archivedDate;
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-    public void setCreatedFrom(String createdFrom) {
-        this.createdBy = createdFrom;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public String getArchivedDate() {
-        return archivedDate;
-    }
-    public void setArchivedDate(String archivedDate) {
-        this.archivedDate = archivedDate;
-    }
 
 }
 

@@ -1,7 +1,6 @@
 package ch.zhaw.gratisbrockibackend.service;
 
 import ch.zhaw.gratisbrockibackend.domain.Item;
-import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
