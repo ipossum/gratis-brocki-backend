@@ -20,12 +20,12 @@ import java.util.Date;
 public abstract class BaseEntity {
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @CreatedDate
-    @Column(updatable = false)
+    @Column(nullable = false, updatable = false)
     protected Date createdDate = Date.from(Instant.now());
 
     @CreatedBy
@@ -34,14 +34,14 @@ public abstract class BaseEntity {
 
     @LastModifiedDate
     @Column
-    protected Date lastModifiedDate = Date.from(Instant.now());
+    protected Date lastModifiedDate = null;
 
     @LastModifiedBy
     @Column(length = 50)
-    protected String lastModifiedBy = "default user";
+    protected String lastModifiedBy = null;
 
     @Column
-    protected String archivedDate;
+    protected String archivedDate = null;
 
 }
 

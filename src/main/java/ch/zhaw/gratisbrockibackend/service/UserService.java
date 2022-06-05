@@ -23,6 +23,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUser(Long id) {
+        return userRepository.findUserByID(id);
+    }
+
     public void addNewUser(User user) {
         Optional<User> studentOptional= userRepository.findUserByEmail(user.getEmail());
         if (studentOptional.isPresent()){
@@ -36,4 +40,5 @@ public class UserService {
 
 
     }
+
 }
