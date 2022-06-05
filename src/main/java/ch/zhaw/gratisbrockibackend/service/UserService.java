@@ -28,8 +28,8 @@ public class UserService {
     }
 
     public void addNewUser(User user) {
-        Optional<User> studentOptional= userRepository.findUserByEmail(user.getEmail());
-        if (studentOptional.isPresent()){
+        Optional<User> userOptional= userRepository.findUserByEmail(user.getEmail());
+        if (userOptional.isPresent()){
             throw new IllegalStateException("email already taken");
         }
         else {
