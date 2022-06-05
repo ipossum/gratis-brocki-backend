@@ -3,12 +3,14 @@ package ch.zhaw.gratisbrockibackend.domain;
 import ch.zhaw.gratisbrockibackend.domain.enums.Category;
 import ch.zhaw.gratisbrockibackend.domain.enums.Condition;
 
-import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.LinkedList;
+
+@Getter
+@Setter
 @Entity
 public class Item extends BaseEntity {
 
@@ -24,55 +26,6 @@ public class Item extends BaseEntity {
 
     @OneToOne(mappedBy = "item", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     Picture picture;
-
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Condition getCondition() {
-        return condition;
-    }
-    public void setCondition(Condition condition) {
-        this.condition = condition;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public Picture getPicture() {
-        return picture;
-    }
-    public void setPicture(Picture picture) {
-        this.picture = picture;
-    }
 
     @Override
     public String toString(){
