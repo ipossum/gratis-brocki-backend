@@ -36,13 +36,14 @@ public class DevConfiguration implements HasLogger {
         User user = new User();
         user.setEmail("user@gmx.ch");
         user.setUsername("jackass");
+        user.setCreatedBy("Andy");
         user = userRepository.save(user);
         return user;
     }
 
     private Item createItemData(User user) {
         Item item = new Item();
-        //item.setOwner(user);
+        item.setOwner(user);
         item.setTitle("Meine Steuerrechnung");
         item.setDescription("kaum benutzte und nicht bezahlte Steuerrechnung abzugeben");
         item.setZipCode(8000);

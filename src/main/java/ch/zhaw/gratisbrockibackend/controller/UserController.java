@@ -24,6 +24,11 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping({"{id}"})
+    public User getUser(@PathVariable("id") Long id) {
+        return userService.getUser(id);
+    }
+
     @PostMapping
     public void addNewUser(@RequestBody User user){
         userService.addNewUser(user);
