@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    User findUserByUsername (String username);
+
     @Query("SELECT u FROM User u WHERE u.id = :id")
     User findUserByID(Long id);
 

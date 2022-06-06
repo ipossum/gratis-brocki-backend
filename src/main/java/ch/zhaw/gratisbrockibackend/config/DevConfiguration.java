@@ -36,6 +36,7 @@ public class DevConfiguration implements HasLogger {
         User user = new User();
         user.setEmail("user@gmx.ch");
         user.setUsername("jackass");
+        user.setPassword("123456");
         user.setCreatedBy("Andy");
         user = userRepository.save(user);
         return user;
