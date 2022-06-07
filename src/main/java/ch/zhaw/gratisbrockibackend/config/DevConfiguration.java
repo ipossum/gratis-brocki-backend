@@ -21,6 +21,9 @@ public class DevConfiguration implements HasLogger {
     @Autowired
     ItemRepository itemRepository;
 
+    @Autowired
+    MessageRepository messageRepository;
+
 
     public DevConfiguration() {
         getLogger().info("DevConfiguration Class");
@@ -30,6 +33,7 @@ public class DevConfiguration implements HasLogger {
     public void test() {
         createUserData();
         createItemData(userRepository.findUserByID(1L));
+        createMessageData();
     }
 
     private User createUserData() {
@@ -52,6 +56,15 @@ public class DevConfiguration implements HasLogger {
         //user.addItem(item);   // issues here with FetchType.LAZY in class User
         // -> FetchType.EAGER works, but is not recommended due to potential overhead (use LAZY and JOIN FETCH instead!)
         return item;
+    }
+
+    private Message createMessageData(){
+        Message message = new Message();
+        message.setMessage("Das ist die erste Nachricht in unserem Forum");
+        message.setCreatedBy("Alex");        
+        message = messageRepository.save(message);
+
+        return message;
     }
 
 }
