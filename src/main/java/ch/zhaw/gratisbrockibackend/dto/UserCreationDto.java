@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class UserCreationDto {
 
+    protected long id;
     protected String createdBy;
     protected Date createdDate;
 

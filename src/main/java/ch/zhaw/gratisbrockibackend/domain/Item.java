@@ -14,12 +14,20 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "item")
 public class Item extends BaseEntity {
 
+    @Column(nullable = false)
     private String title;
+
     private String description;
+
+    @Column(nullable = false)
     private int zipCode;
+
+    @Column(nullable = false)
     private Category category;
+
     private Condition condition;
     //private LinkedList<Message> messages;
 
