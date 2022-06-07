@@ -24,6 +24,9 @@ public class DevConfiguration implements HasLogger {
     @Autowired
     MessageRepository messageRepository;
 
+    @Autowired
+    PictureRepository pictureRepository;
+
 
     public DevConfiguration() {
         getLogger().info("DevConfiguration Class");
@@ -34,6 +37,7 @@ public class DevConfiguration implements HasLogger {
         createUserData();
         createItemData(userRepository.findUserByID(1L));
         createMessageData();
+        createPictureData();
     }
 
     private User createUserData() {
@@ -61,10 +65,19 @@ public class DevConfiguration implements HasLogger {
     private Message createMessageData(){
         Message message = new Message();
         message.setMessage("Das ist die erste Nachricht in unserem Forum");
-        message.setCreatedBy("Alex");        
+        message.setCreatedBy("Alex");
         message = messageRepository.save(message);
 
         return message;
     }
 
+    private Picture createPictureData(){
+        Picture picture = new Picture();
+        picture.setName("Euphonium");
+        picture.setUrl("https://4.imimg.com/data4/AV/OU/MY-1985769/gold-euphonium-500x500.jpg");
+        picture.setCreatedBy("Alex");
+        picture = pictureRepository.save(picture);
+
+        return picture;
+    }
 }

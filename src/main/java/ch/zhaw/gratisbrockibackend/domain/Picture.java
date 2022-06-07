@@ -2,9 +2,8 @@ package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Getter
 @Setter
@@ -14,7 +13,7 @@ public class Picture extends BaseEntity {
     private String name;
     private String url;
 
-    @OneToOne
+    @ManyToOne
     private Item item;
 
     @Override
@@ -22,7 +21,6 @@ public class Picture extends BaseEntity {
         return "Picture{" +
                 "name: " + name + '\'' +
                 "URL: " + url + '\'' +
-                "item: " + item + '\'' +
                 '}';
     }
 }

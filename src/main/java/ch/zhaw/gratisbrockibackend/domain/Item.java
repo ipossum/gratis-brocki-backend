@@ -26,10 +26,11 @@ public class Item extends BaseEntity {
     @ManyToOne
     private User owner;
 
-    @OneToOne(mappedBy = "item", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-    Picture picture;
+    //@OneToOne(mappedBy = "item", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "item")
+    private Set<Picture> pictures = new HashSet<>();
 
-    @OneToMany (mappedBy = "message")
+    @OneToMany (mappedBy = "item")
     private Set<Message> messages = new HashSet<>();
 
     @Override
