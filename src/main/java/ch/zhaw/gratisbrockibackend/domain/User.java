@@ -1,55 +1,125 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
-import ch.zhaw.gratisbrockibackend.domain.enums.Role;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Getter
-@Setter
+
 @Entity
-@Table(name = "user")
-// @JsonIgnoreProperties({ "password", "items" }) // quick fix until we set up DTOs
-public class User extends BaseEntity{
+@Table( name="user" )
+public class User extends BaseEntity {
 
-    @Column(nullable = false, unique = true)
-    private String username;
 
-    private String email;
-    private String phoneNumber;
+	@Column( unique=true, nullable=false )
+	private String email;
 
-    @Column(nullable = false)
-    private String password;
+	@Column( nullable=false )
+	private String password;
 
-    @Transient
-    @JsonProperty
-    private String confirmedPassword;
+	private String fullName;
 
-    private Role role;
+	public boolean accountNonExpired;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-    private Set<Item> items = new HashSet<>();
+	public boolean accountNonLocked;
 
-    public void addItem (Item item){
-        items.add(item);
-    }
+	public boolean credentialsNonExpired;
 
-    @Override
-    public String toString(){
-        return "User{" +
-                "id: " + id + '\'' +
-                "username: " + username + '\'' +
-                "email: " + email + '\'' +
-                "phone number: " + phoneNumber + '\'' +
-                "user role: " + role + '\'' +
-                '}';
-    }
+	public boolean enabled;
+
+	@ManyToMany( cascade = CascadeType.REFRESH, fetch = FetchType.EAGER )
+	@JoinTable(
+			name = "user_role",
+			joinColumns = {@JoinColumn(name="user_id")},
+			inverseJoinColumns = {@JoinColumn(name="role_id")}
+	)
+	private Set<Role> roles = new HashSet<Role>();
+
+	public User() {}
+
+	public User(String fullName, String email) {
+		this.fullName = fullName;
+		this.email = email;
+		this.enabled = true;
+		this.accountNonLocked = true;
+		this.credentialsNonExpired = true;
+		this.accountNonExpired = true;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", password=" + password + "]";
+	}
 
 }
-
