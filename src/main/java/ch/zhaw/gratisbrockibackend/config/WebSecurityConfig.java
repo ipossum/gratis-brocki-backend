@@ -1,8 +1,8 @@
 package ch.zhaw.gratisbrockibackend.config;
 
-import com.example.demoinitial.auth.StatelessAuthenticationFilter;
-import com.example.demoinitial.auth.StatelessLoginFilter;
-import com.example.demoinitial.auth.TokenAuthenticationService;
+import ch.zhaw.gratisbrockibackend.auth.StatelessAuthenticationFilter;
+import ch.zhaw.gratisbrockibackend.auth.StatelessLoginFilter;
+import ch.zhaw.gratisbrockibackend.auth.TokenAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

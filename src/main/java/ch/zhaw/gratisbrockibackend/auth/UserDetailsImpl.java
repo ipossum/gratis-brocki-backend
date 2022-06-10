@@ -1,7 +1,7 @@
 package ch.zhaw.gratisbrockibackend.auth;
 
-import com.example.demoinitial.domain.Role;
-import com.example.demoinitial.domain.User;
+import ch.zhaw.gratisbrockibackend.domain.Role;
+import ch.zhaw.gratisbrockibackend.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

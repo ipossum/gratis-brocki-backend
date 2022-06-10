@@ -1,6 +1,6 @@
 package ch.zhaw.gratisbrockibackend.service;
 
-import com.example.demoinitial.domain.User;
+import ch.zhaw.gratisbrockibackend.domain.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 

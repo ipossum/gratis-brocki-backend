@@ -1,8 +1,8 @@
 package ch.zhaw.gratisbrockibackend.service;
 
-import com.example.demoinitial.auth.UserDetailsImpl;
-import com.example.demoinitial.domain.User;
-import com.example.demoinitial.repository.UserRepository;
+import ch.zhaw.gratisbrockibackend.auth.UserDetailsImpl;
+import ch.zhaw.gratisbrockibackend.domain.User;
+import ch.zhaw.gratisbrockibackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

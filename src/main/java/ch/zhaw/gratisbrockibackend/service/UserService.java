@@ -1,6 +1,9 @@
 package ch.zhaw.gratisbrockibackend.service;
 
 
+import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistException;
+import ch.zhaw.gratisbrockibackend.domain.Role;
+import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.repository.RoleRepository;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,7 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public User registerNewUserAccount(final User userDto) {
+    public User registerNewUserAccount(final User userDto) throws UserAlreadyExistException {
         if (emailExists(userDto.getEmail())) {
             throw new UserAlreadyExistException("There is an account with that email address: " + userDto.getEmail());
         }

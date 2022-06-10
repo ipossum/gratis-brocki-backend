@@ -35,7 +35,8 @@ public class DevConfiguration implements HasLogger {
     @PostConstruct
     public void test() {
         createUserData();
-        createItemData(userRepository.findUserByID(1L));
+        //createItemData(userRepository.findUserByID(1L));
+        createItemData(userRepository.findByFullName("jackass").get(0));
         createMessageData();
         createPictureData();
     }
@@ -43,7 +44,8 @@ public class DevConfiguration implements HasLogger {
     private User createUserData() {
         User user = new User();
         user.setEmail("user@gmx.ch");
-        user.setUsername("jackass");
+        //user.setUsername("jackass");
+        user.setFullName("jackass");
         user.setPassword("123456");
         user.setCreatedBy("Andy");
         user = userRepository.save(user);
