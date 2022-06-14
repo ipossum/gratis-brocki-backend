@@ -1,6 +1,6 @@
 package ch.zhaw.gratisbrockibackend.config;
 
-
+/*
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.domain.Role;
 import ch.zhaw.gratisbrockibackend.repository.RoleRepository;
@@ -73,3 +73,4 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         return role;
     }
 }
+*/

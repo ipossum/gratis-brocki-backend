@@ -1,7 +1,7 @@
 package ch.zhaw.gratisbrockibackend.auth;
 
-import ch.zhaw.gratisbrockibackend.domain.Role;
 import ch.zhaw.gratisbrockibackend.domain.User;
+import ch.zhaw.gratisbrockibackend.domain.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,10 +24,8 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-		Set<Role> roles = user.getRoles();
-		for( Role role : roles ) {
-			authorities.add( new SimpleGrantedAuthority(role.getRole()) );
-		}
+		Role role = user.getRole();
+		authorities.add(new SimpleGrantedAuthority(role.toString()));
 		return authorities;
 	}
 

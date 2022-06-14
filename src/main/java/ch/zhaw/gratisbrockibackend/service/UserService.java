@@ -1,18 +1,16 @@
 package ch.zhaw.gratisbrockibackend.service;
 
-
-import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistException;
-import ch.zhaw.gratisbrockibackend.domain.Role;
+import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
 import ch.zhaw.gratisbrockibackend.domain.User;
-import ch.zhaw.gratisbrockibackend.repository.RoleRepository;
+import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 
 @Service
 @Transactional
@@ -24,21 +22,25 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RoleRepository roleRepository;
-
-    public User registerNewUserAccount(final User userDto) throws UserAlreadyExistException {
-        if (emailExists(userDto.getEmail())) {
-            throw new UserAlreadyExistException("There is an account with that email address: " + userDto.getEmail());
+    public User registerNewUser(final UserCreationDto userCreationDto) throws UserAlreadyExistsException {
+        if (emailExists(userCreationDto.getEmail())) {
+            throw new UserAlreadyExistsException("An account with this email address already exists: " + userCreationDto.getEmail());
         }
-        final User user = new User(userDto.getFullName(), userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRoles(new HashSet<Role>(Arrays.asList(roleRepository.findByRole("ROLE_USER"))));
+        final User user = new User(userCreationDto.getUsername(), userCreationDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
         return userRepository.save(user);
     }
 
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    public User getUser(Long id) {
+        return userRepository.findUserById(id);
+    }
+
     private boolean emailExists(final String email) {
-        return userRepository.findByEmail(email) != null;
+        return userRepository.findUserByEmail(email) != null;
     }
 
 }

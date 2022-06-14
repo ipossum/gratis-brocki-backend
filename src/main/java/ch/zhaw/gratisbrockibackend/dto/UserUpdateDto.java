@@ -1,6 +1,6 @@
 package ch.zhaw.gratisbrockibackend.dto;
 
-import ch.zhaw.gratisbrockibackend.domain.Role;
+import ch.zhaw.gratisbrockibackend.domain.enums.Role;
 
 import java.util.Date;
 
