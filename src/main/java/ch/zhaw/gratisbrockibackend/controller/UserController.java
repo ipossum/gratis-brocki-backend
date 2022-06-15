@@ -26,7 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+   /* @GetMapping
     public List<User> getUsers(){
         return userService.getUsers();
     }
@@ -50,6 +50,6 @@ public class UserController {
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(user, userDto);
         return ResponseEntity.ok(userDto);
-    }
+    }*/
 
 }
