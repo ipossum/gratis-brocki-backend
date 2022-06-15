@@ -4,15 +4,14 @@ import ch.zhaw.gratisbrockibackend.domain.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 public class UserDto {
 
+    private Long id;
     private String username;
     private String email;
     private String phoneNumber;
-    //private Role role;
+    private Role role;
 
 }

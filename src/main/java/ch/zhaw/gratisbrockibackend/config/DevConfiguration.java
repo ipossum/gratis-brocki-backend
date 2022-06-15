@@ -35,7 +35,7 @@ public class DevConfiguration implements HasLogger {
     @PostConstruct
     public void test() {
         createUserData();
-        createItemData(userRepository.findUserByID(1L));
+        createItemData(userRepository.findUserById(1L));
         createMessageData();
         createPictureData();
     }

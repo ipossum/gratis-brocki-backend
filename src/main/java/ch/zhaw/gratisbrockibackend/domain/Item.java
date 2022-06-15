@@ -14,7 +14,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "item")
 public class Item extends BaseEntity {
 
     @Column(nullable = false)

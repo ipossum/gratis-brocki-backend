@@ -1,6 +1,8 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
+import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
 import ch.zhaw.gratisbrockibackend.domain.User;
+import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.UserDto;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
 import ch.zhaw.gratisbrockibackend.service.UserService;
@@ -37,8 +39,8 @@ public class UserController {
     }
 
     @PostMapping
-    public void addNewUser(@RequestBody User user){
-        userService.addNewUser(user);
+    public void addNewUser(@RequestBody UserCreationDto userCreationDto) throws UserAlreadyExistsException {
+        userService.registerNewUser(userCreationDto);
     }
 
     @PostMapping("/create")
