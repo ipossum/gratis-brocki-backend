@@ -1,6 +1,7 @@
 package ch.zhaw.gratisbrockibackend.repository;
 
 import ch.zhaw.gratisbrockibackend.domain.User;
+import ch.zhaw.gratisbrockibackend.domain.dto.UserDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

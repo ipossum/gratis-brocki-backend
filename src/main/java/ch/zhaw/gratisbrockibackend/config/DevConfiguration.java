@@ -1,6 +1,7 @@
 package ch.zhaw.gratisbrockibackend.config;
 
 import ch.zhaw.gratisbrockibackend.domain.*;
+import ch.zhaw.gratisbrockibackend.domain.dto.UserDto;
 import ch.zhaw.gratisbrockibackend.domain.enums.Category;
 import ch.zhaw.gratisbrockibackend.repository.*;
 import ch.zhaw.gratisbrockibackend.utils.HasLogger;
@@ -57,7 +58,6 @@ public class DevConfiguration implements HasLogger {
         item.setDescription("kaum benutzte und nicht bezahlte Steuerrechnung abzugeben");
         item.setZipCode(8000);
         item.setCategory(Category.ChildrenItemCategory);
-        item.setOwner(user);
         item = itemRepository.save(item);
         //user.addItem(item);   // issues here with FetchType.LAZY in class User
         // -> FetchType.EAGER works, but is not recommended due to potential overhead (use LAZY and JOIN FETCH instead!)

@@ -1,18 +1,18 @@
-package ch.zhaw.gratisbrockibackend.dto;
+package ch.zhaw.gratisbrockibackend.domain.dto;
 
 import ch.zhaw.gratisbrockibackend.domain.enums.Role;
 
 import java.util.Date;
 
-public class UserUpdateDto {
+public class UserCreationDto {
 
-    private String lastModifiedBy;
-    private Date lastModifiedDate;
+    protected Long id;
+    protected String createdBy;
+    protected Date createdDate;
 
     private String username;
     private String email;
     private String phoneNumber;
     private Role role;
-
 
 }

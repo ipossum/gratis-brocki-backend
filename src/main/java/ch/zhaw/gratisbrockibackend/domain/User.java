@@ -18,10 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 // @JsonIgnoreProperties({ "password", "items" }) // quick fix until we set up DTOs
 public class User extends BaseEntity{
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "user_name", nullable = false, unique = true)
     private String username;
 
     private String email;
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(nullable = false)

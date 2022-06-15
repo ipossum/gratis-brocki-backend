@@ -20,16 +20,16 @@ import java.util.Date;
 public abstract class BaseEntity {
 
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_date", nullable = false, updatable = false)
     protected Date createdDate = Date.from(Instant.now());
 
     @CreatedBy
-    @Column(nullable = false, updatable = false, length = 50)
+    @Column(name = "created_by", nullable = false, updatable = false, length = 50)
     protected String createdBy = "default user";
 
     @LastModifiedDate

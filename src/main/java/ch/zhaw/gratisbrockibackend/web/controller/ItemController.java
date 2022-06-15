@@ -1,7 +1,7 @@
-package ch.zhaw.gratisbrockibackend.controller;
+package ch.zhaw.gratisbrockibackend.web.controller;
 
 import ch.zhaw.gratisbrockibackend.domain.Item;
-import ch.zhaw.gratisbrockibackend.dto.ItemDto;
+import ch.zhaw.gratisbrockibackend.domain.dto.ItemDto;
 import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
 import ch.zhaw.gratisbrockibackend.service.ItemService;
 
@@ -26,12 +26,17 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<Item> getItems(){
         return itemService.getItems();
     }
 
-    @PostMapping("/create")
+    @GetMapping("/{id}")
+    public Item getItem(@PathVariable("id") Long id) {
+        return itemService.getItem(id);
+    }
+
+    @PostMapping("/")
     public ResponseEntity<ItemDto> create(@RequestBody Item item) {
         if(item.getOwner()==null) {
             return ResponseEntity.badRequest().build();

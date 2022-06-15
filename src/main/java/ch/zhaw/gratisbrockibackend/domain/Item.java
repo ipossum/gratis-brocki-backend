@@ -22,7 +22,7 @@ public class Item extends BaseEntity {
 
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "zip_code", nullable = false)
     private int zipCode;
 
     @Column(nullable = false)

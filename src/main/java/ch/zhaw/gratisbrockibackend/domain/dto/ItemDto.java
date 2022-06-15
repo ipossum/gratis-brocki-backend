@@ -1,4 +1,4 @@
-package ch.zhaw.gratisbrockibackend.dto;
+package ch.zhaw.gratisbrockibackend.domain.dto;
 
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.domain.enums.Category;
