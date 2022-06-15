@@ -9,20 +9,18 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
-// @JsonIgnoreProperties({ "password", "items" }) // quick fix until we set up DTOs
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
-    @Column(name = "user_name", nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
 
-    private String email;
-    @Column(name = "phone_number")
+	@Column(nullable = false, unique = true)
+	private String email;
+
     private String phoneNumber;
 
     @Column(nullable = false)
@@ -34,8 +32,29 @@ public class User extends BaseEntity{
 
     private Role role;
 
+	// TODO: check whether we really need the following four attributes
+    public boolean accountNonExpired;
+
+	public boolean accountNonLocked;
+
+	public boolean credentialsNonExpired;
+
+	public boolean enabled;
+
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Item> items = new HashSet<>();
+
+	public User() {}
+
+	public User(String username, String email) {
+		this.username = username;
+		this.email = email;
+        this.role = Role.USER;
+		this.enabled = true;
+		this.accountNonLocked = true;
+		this.credentialsNonExpired = true;
+		this.accountNonExpired = true;
+	}
 
     public void addItem (Item item){
         items.add(item);
@@ -53,4 +72,3 @@ public class User extends BaseEntity{
     }
 
 }
-
