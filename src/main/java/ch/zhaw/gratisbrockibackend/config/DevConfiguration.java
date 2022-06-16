@@ -45,7 +45,7 @@ public class DevConfiguration implements HasLogger {
         user.setEmail("user@gmx.ch");
         user.setUsername("jackass");
         user.setPassword("123456");
-        user.setCreatedBy("Andy");
+        user.setCreatedBy(user.getUsername());
         userRepository.save(user);
     }
 
@@ -56,6 +56,7 @@ public class DevConfiguration implements HasLogger {
         item.setDescription("kaum benutzte und nicht bezahlte Steuerrechnung abzugeben");
         item.setZipCode(8000);
         item.setCategory(Category.ChildrenItemCategory);
+        user.setCreatedBy(user.getUsername());
         itemRepository.save(item);
         //user.addItem(item);   // issues here with FetchType.LAZY in class User
         // -> FetchType.EAGER works, but is not recommended due to potential overhead (use LAZY and JOIN FETCH instead!)
