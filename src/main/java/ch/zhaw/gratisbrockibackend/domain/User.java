@@ -15,11 +15,13 @@ import java.util.Set;
 @Entity
 public class User extends BaseEntity {
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String username;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String email;
+
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(nullable = false)
@@ -40,7 +42,7 @@ public class User extends BaseEntity {
 	public boolean enabled;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-    private Set<Item> items = new HashSet<>();
+    private Set<Item> items;
 
 	public User() {}
 
@@ -52,6 +54,7 @@ public class User extends BaseEntity {
 		this.accountNonLocked = true;
 		this.credentialsNonExpired = true;
 		this.accountNonExpired = true;
+        this.items = new HashSet<>();
 	}
 
     public void addItem (Item item){

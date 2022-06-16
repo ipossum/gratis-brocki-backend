@@ -20,38 +20,32 @@ public class UserController {
 
     private final UserService userService;
 
-    @Autowired
-    UserRepository userRepository;
+    //@Autowired
+    //UserRepository userRepository;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getUsers(){
+    @GetMapping("/")
+    public List<UserDto> getUsers(){
         return userService.getUsers();
     }
 
-    @GetMapping({"{id}"})
-    public User getUser(@PathVariable("id") Long id) {
+    @GetMapping({"/{id}"})
+    public UserDto getUser(@PathVariable("id") Long id) {
         return userService.getUser(id);
     }
 
-    @PostMapping
-    public void addNewUser(@RequestBody UserCreationDto userCreationDto) throws UserAlreadyExistsException {
-        userService.registerNewUser(userCreationDto);
+    @PostMapping("/{id}")
+    public UserDto registerNewUser(@RequestBody UserCreationDto userCreationDto) throws UserAlreadyExistsException {
+        return userService.registerNewUser(userCreationDto);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<UserDto> createUser(@RequestBody User user) {
-        if(!user.getPassword().equals(user.getConfirmedPassword())) {
-            return ResponseEntity.badRequest().build();
-        }
-        userRepository.save(user);
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(user, userDto);
-        return ResponseEntity.ok(userDto);
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
     }
 
 }

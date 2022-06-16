@@ -1,6 +1,7 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
 import ch.zhaw.gratisbrockibackend.domain.Item;
+import ch.zhaw.gratisbrockibackend.dto.ItemCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.ItemDto;
 import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
 import ch.zhaw.gratisbrockibackend.service.ItemService;
@@ -26,20 +27,18 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @GetMapping
-    public List<Item> getItems(){
+    @GetMapping("/")
+    public List<ItemDto> getItems() {
         return itemService.getItems();
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<ItemDto> create(@RequestBody Item item) {
-        if(item.getOwner()==null) {
-            return ResponseEntity.badRequest().build();
-        }
-        itemRepository.save(item);
-        ItemDto itemDto = new ItemDto();
-        BeanUtils.copyProperties(item, itemDto);
-        return ResponseEntity.ok(itemDto);
+    @GetMapping("/{id}")
+    public ItemDto getItem(@PathVariable("id") Long id) {
+        return itemService.getItem(id);
     }
 
+    @PostMapping("/")
+    public ResponseEntity<ItemCreationDto> createNewItem(@RequestBody ItemCreationDto itemCreationDto) {
+        return itemService.createNewItem(itemCreationDto);
+    }
 }
