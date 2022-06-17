@@ -2,10 +2,9 @@ package ch.zhaw.gratisbrockibackend.controller;
 
 import ch.zhaw.gratisbrockibackend.dto.ItemCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.ItemDto;
-import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
 import ch.zhaw.gratisbrockibackend.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,14 +16,6 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
-
-    @Autowired
-    ItemRepository itemRepository;
-
-    @Autowired
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
-    }
 
     @GetMapping("/")
     public List<ItemDto> getItems() {
