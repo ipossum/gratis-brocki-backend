@@ -10,6 +10,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -41,8 +43,7 @@ public class Item extends BaseEntity {
     private Set<Picture> pictures;
 
     @OneToMany (mappedBy = "item")
-    private Set<Message> messages;
-    // TODO: does a set fit here? does this cause problems when two messages are identical (e.g. "Thanks")?
+    private List<Message> messages;
 
     public Item(String createdBy, User owner, String title, String description, int zipCode, Category category, Condition condition) {
         super(createdBy); // TODO: replace with user id
@@ -53,8 +54,7 @@ public class Item extends BaseEntity {
         this.category = category;
         this.condition = condition;
         this.pictures = new HashSet<>();
-        this.messages = new HashSet<>();
+        this.messages = new LinkedList<>();
     }
-
 }
 
