@@ -1,18 +1,15 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @MappedSuperclass
@@ -38,8 +35,6 @@ public abstract class BaseEntity {
 
     @Column
     protected String archivedDate;
-
-    public BaseEntity () {}
 
     public BaseEntity (String createdBy) {
         this.createdDate = Date.from(Instant.now());

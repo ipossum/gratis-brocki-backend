@@ -1,11 +1,13 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -15,8 +17,6 @@ public class Message extends BaseEntity {
 
     @ManyToOne
     private Item item;
-
-    public Message() {}
 
     public Message(String createdBy, String message, Item item) {
         super(createdBy);

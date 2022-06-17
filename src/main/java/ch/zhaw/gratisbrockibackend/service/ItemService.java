@@ -6,22 +6,18 @@ import ch.zhaw.gratisbrockibackend.dto.ItemCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.ItemDto;
 import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class ItemService {
 
     private final ItemRepository itemRepository;
-
-    @Autowired
-    public ItemService(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
-    }
 
     public List<ItemDto> getItems() {
         return itemRepository.findAll()

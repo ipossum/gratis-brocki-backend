@@ -6,6 +6,7 @@ import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.UserDto;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,10 @@ import org.springframework.web.client.HttpClientErrorException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 @Transactional
-public class UserService {
+public class UserService { // TODO: remove "@Autowired"?
 
     @Autowired
     private UserRepository userRepository;

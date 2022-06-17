@@ -1,19 +1,17 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
 import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
-import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.UserDto;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
 import ch.zhaw.gratisbrockibackend.service.UserService;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RequestMapping("api/v1/users")
 @RestController
 public class UserController {
@@ -22,11 +20,6 @@ public class UserController {
 
     //@Autowired
     //UserRepository userRepository;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/")
     public List<UserDto> getUsers(){

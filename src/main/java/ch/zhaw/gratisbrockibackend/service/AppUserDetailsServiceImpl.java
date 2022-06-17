@@ -3,21 +3,17 @@ package ch.zhaw.gratisbrockibackend.service;
 import ch.zhaw.gratisbrockibackend.auth.UserDetailsImpl;
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+@AllArgsConstructor
 @Service
 public class AppUserDetailsServiceImpl implements AppUserDetailsService {
 
 	private final UserRepository userRepository;
-
-	@Autowired
-	public AppUserDetailsServiceImpl(UserRepository userRepository){
-		this.userRepository = userRepository;
-	}
 
 	@Override
 	public User findByEmail(String email) {

@@ -4,6 +4,7 @@ import ch.zhaw.gratisbrockibackend.domain.enums.Role;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -46,9 +48,7 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Item> items;
 
-	public User() {}
-
-	public User(String username, String email) {
+    public User(String username, String email) {
         super(username);
 		this.username = username;
 		this.email = email;

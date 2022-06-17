@@ -1,12 +1,14 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+@NoArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -18,8 +20,6 @@ public class Picture extends BaseEntity {
 
     @ManyToOne
     private Item item;
-
-    public Picture() {}
 
     public Picture(String createdBy, Item item, String name, String url) {
         super(createdBy);
