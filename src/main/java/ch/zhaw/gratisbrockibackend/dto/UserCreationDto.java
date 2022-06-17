@@ -1,10 +1,7 @@
 package ch.zhaw.gratisbrockibackend.dto;
 
-import ch.zhaw.gratisbrockibackend.domain.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter
