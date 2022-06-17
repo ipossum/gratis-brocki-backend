@@ -2,9 +2,12 @@ package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -25,11 +28,4 @@ public class Picture extends BaseEntity {
         this.url = url;
     }
 
-    @Override
-    public String toString(){
-        return "Picture{" +
-                "name: " + name + '\'' +
-                "URL: " + url + '\'' +
-                '}';
-    }
 }

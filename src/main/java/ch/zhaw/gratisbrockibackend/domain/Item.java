@@ -5,12 +5,14 @@ import ch.zhaw.gratisbrockibackend.domain.enums.Condition;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -55,18 +57,5 @@ public class Item extends BaseEntity {
         this.messages = new HashSet<>();
     }
 
-    @Override
-    public String toString(){
-        return "Item{" +
-                "id: " + id + '\'' +
-                "title: " + title + '\'' +
-                "description: " + description + '\'' +
-                "zip code: " + zipCode + '\'' +
-                "item category: " + category + '\'' +
-                "item condition: " + condition + '\'' +
-                "created date: " + createdDate + '\'' +
-                "owner: " + owner + '\'' +
-                '}';
-    }
 }
 

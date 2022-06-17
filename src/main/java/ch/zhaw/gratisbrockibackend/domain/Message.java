@@ -2,9 +2,11 @@ package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -22,10 +24,4 @@ public class Message extends BaseEntity {
         this.item = item;
     }
 
-    @Override
-    public String toString(){
-        return "Message{" +
-                "message: " + message + '\'' +
-                '}';
-    }
 }

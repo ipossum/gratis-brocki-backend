@@ -5,11 +5,13 @@ import ch.zhaw.gratisbrockibackend.domain.enums.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -62,17 +64,6 @@ public class User extends BaseEntity {
 
     public void addItem (Item item){
         items.add(item);
-    }
-
-    @Override
-    public String toString(){
-        return "User{" +
-                "id: " + id + '\'' +
-                "username: " + username + '\'' +
-                "email: " + email + '\'' +
-                "phone number: " + phoneNumber + '\'' +
-                "user role: " + role + '\'' +
-                '}';
     }
 
 }
