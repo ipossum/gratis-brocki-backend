@@ -2,15 +2,15 @@ package ch.zhaw.gratisbrockibackend.domain;
 
 import ch.zhaw.gratisbrockibackend.domain.enums.Category;
 import ch.zhaw.gratisbrockibackend.domain.enums.Condition;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.LinkedList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.Set;
 
@@ -45,16 +45,5 @@ public class Item extends BaseEntity {
     @OneToMany (mappedBy = "item")
     private List<Message> messages;
 
-    public Item(User owner, String title, String description, int zipCode, Category category, Condition condition) {
-        super();
-        this.owner = owner;
-        this.title = title;
-        this.description = description;
-        this.zipCode = zipCode;
-        this.category = category;
-        this.condition = condition;
-        this.pictures = new HashSet<>();
-        this.messages = new LinkedList<>();
-    }
 }
 
