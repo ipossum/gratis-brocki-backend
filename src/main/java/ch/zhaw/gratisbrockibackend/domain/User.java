@@ -31,10 +31,6 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @Transient
-    @JsonProperty
-    private String confirmedPassword;
-
     private Role role;
 
 	public boolean accountNonExpired;

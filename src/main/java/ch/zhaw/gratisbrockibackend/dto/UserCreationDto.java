@@ -10,14 +10,9 @@ import java.util.Date;
 @Setter
 public class UserCreationDto {
 
-    protected Long id;
-    protected String createdBy;
-    protected Date createdDate;
-
     private String username;
     private String email;
     private String password;
     private String phoneNumber;
-    private Role role;
 
 }

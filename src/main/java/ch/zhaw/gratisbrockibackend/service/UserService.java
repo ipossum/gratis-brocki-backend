@@ -4,6 +4,7 @@ import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.UserDto;
+import ch.zhaw.gratisbrockibackend.mapper.UserMapper;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
@@ -87,9 +88,6 @@ public class UserService { // TODO: remove "@Autowired"?
     public boolean validCredentials(User user) throws UserAlreadyExistsException {
         if (userRepository.findUserByEmail(user.getEmail()) != null){
             throw new UserAlreadyExistsException("An account with this email address already exists: " + user.getEmail());
-        }
-        if (!user.getPassword().equals(user.getConfirmedPassword())) {
-            throw new IllegalStateException("password doesn't match");
         }
         return true;
     }
