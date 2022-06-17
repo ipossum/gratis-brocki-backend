@@ -43,7 +43,7 @@ public class UserService {
 
     public UserDto getUser(Long id) {
         try {
-            return convertEntityToDto(userRepository.getById(id));
+            return convertEntityToDto(userRepository.findUserById(id));
         } catch (HttpClientErrorException.BadRequest e) {
             e.printStackTrace();
             return null;
@@ -53,7 +53,7 @@ public class UserService {
     public void updateUser(Long id, UserDto userDto) {
         User user;
         try {
-            user = userRepository.getById(id);
+            user = userRepository.findUserById(id);
             if(validCredentials(user)) {
                 user.setEmail(userDto.getEmail());
                 user.setPhoneNumber(userDto.getPhoneNumber());

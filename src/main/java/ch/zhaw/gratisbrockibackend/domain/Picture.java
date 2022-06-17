@@ -16,6 +16,15 @@ public class Picture extends BaseEntity {
     @ManyToOne
     private Item item;
 
+    public Picture() {}
+
+    public Picture(String createdBy, Item item, String name, String url) {
+        super(createdBy);
+        this.item = item;
+        this.name = name;
+        this.url = url;
+    }
+
     @Override
     public String toString(){
         return "Picture{" +

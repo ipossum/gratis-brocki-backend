@@ -1,6 +1,7 @@
 package ch.zhaw.gratisbrockibackend.service;
 
 import ch.zhaw.gratisbrockibackend.domain.Item;
+import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.ItemCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.ItemDto;
 import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
@@ -30,15 +31,16 @@ public class ItemService {
     }
 
     public ItemDto getItem(Long id) {
-        return convertEntityToDto(itemRepository.getById(id));
+        return convertEntityToDto(itemRepository.findItemById(id));
     }
 
     public ResponseEntity<ItemCreationDto> createNewItem(ItemCreationDto itemCreationDto) {
+        User owner = itemCreationDto.getOwner();
 
-        if (itemCreationDto.getOwner() == null) {
+        if (owner == null) {
             return ResponseEntity.badRequest().build();
         }
-        Item item = new Item();
+        Item item = new Item(owner.getCreatedBy(), owner, itemCreationDto.getTitle(), itemCreationDto.getDescription(), itemCreationDto.getZipCode(), itemCreationDto.getCategory(), itemCreationDto.getCondition());
         item.setTitle(itemCreationDto.getTitle()); // TODO: introduce mapper (e.g. MapStruct) to handle this conversion
         item.setDescription(itemCreationDto.getDescription());
         itemRepository.save(item);

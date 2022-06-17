@@ -22,7 +22,7 @@ public class Item extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    @Column(name = "zip_code", nullable = false)
+    @Column(nullable = false)
     private int zipCode;
 
     @Column(nullable = false)
@@ -41,9 +41,11 @@ public class Item extends BaseEntity {
     private Set<Message> messages;
     // TODO: does a set fit here? does this cause problems when two messages are identical (e.g. "Thanks")?
 
-    public Item() {}
+    public Item () {}
 
-    public Item(String title, String description, int zipCode, Category category, Condition condition) {
+    public Item(String createdBy, User owner, String title, String description, int zipCode, Category category, Condition condition) {
+        super(createdBy); // TODO: replace with user id
+        this.owner = owner;
         this.title = title;
         this.description = description;
         this.zipCode = zipCode;

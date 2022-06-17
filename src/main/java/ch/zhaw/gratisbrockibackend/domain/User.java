@@ -21,7 +21,7 @@ public class User extends BaseEntity {
 	@Column(nullable = false, unique = true)
 	private String email;
 
-    @Column(name = "phone_number")
+    @Column
     private String phoneNumber;
 
     @Column(nullable = false)
@@ -47,8 +47,11 @@ public class User extends BaseEntity {
 	public User() {}
 
 	public User(String username, String email) {
+        super(username);
 		this.username = username;
 		this.email = email;
+        this.phoneNumber = null;
+        this.password = null;
         this.role = Role.USER;
 		this.enabled = true;
 		this.accountNonLocked = true;

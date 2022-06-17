@@ -24,24 +24,30 @@ public abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @CreatedDate
-    @Column(name = "created_date", nullable = false, updatable = false)
-    protected Date createdDate = Date.from(Instant.now());
+    @Column(nullable = false, updatable = false)
+    protected Date createdDate;
 
-    @CreatedBy
-    @Column(name = "created_by", nullable = false, updatable = false, length = 50)
-    protected String createdBy = null;
+    @Column(nullable = false, updatable = false, length = 50)
+    protected String createdBy;
 
-    @LastModifiedDate
-    @Column(name = "last_modified_date")
-    protected Date lastModifiedDate = null;
+    @Column
+    protected Date lastModifiedDate;
 
-    @LastModifiedBy
-    @Column(name = "last_modified_by", length = 50)
-    protected String lastModifiedBy = null;
+    @Column(length = 50)
+    protected String lastModifiedBy;
 
-    @Column(name = "archived_date")
-    protected String archivedDate = null;
+    @Column
+    protected String archivedDate;
+
+    public BaseEntity () {}
+
+    public BaseEntity (String createdBy) {
+        this.createdDate = Date.from(Instant.now());
+        this.createdBy = createdBy;
+        this.lastModifiedDate = null;
+        this.lastModifiedBy = null;
+        this.archivedDate = null;
+    }
 
 }
 
