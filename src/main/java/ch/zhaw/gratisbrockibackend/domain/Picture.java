@@ -21,8 +21,8 @@ public class Picture extends BaseEntity {
     @ManyToOne
     private Item item;
 
-    public Picture(String createdBy, Item item, String name, String url) {
-        super(createdBy);
+    public Picture(Item item, String name, String url) {
+        super();
         this.item = item;
         this.name = name;
         this.url = url;

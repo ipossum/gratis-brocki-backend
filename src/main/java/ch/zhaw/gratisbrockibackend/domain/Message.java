@@ -18,10 +18,10 @@ public class Message extends BaseEntity {
     @ManyToOne
     private Item item;
 
-    public Message(String createdBy, String message, Item item) {
-        super(createdBy);
-        this.message = message;
+    public Message(Item item, String message) {
+        super();
         this.item = item;
+        this.message = message;
     }
 
 }

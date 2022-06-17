@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @MappedSuperclass
@@ -24,23 +23,15 @@ public abstract class BaseEntity {
     @Column(nullable = false, updatable = false)
     protected Date createdDate;
 
-    @Column(nullable = false, updatable = false, length = 50)
-    protected String createdBy;
-
     @Column
     protected Date lastModifiedDate;
-
-    @Column(length = 50)
-    protected String lastModifiedBy;
 
     @Column
     protected String archivedDate;
 
-    public BaseEntity (String createdBy) {
+    public BaseEntity () {
         this.createdDate = Date.from(Instant.now());
-        this.createdBy = createdBy;
         this.lastModifiedDate = null;
-        this.lastModifiedBy = null;
         this.archivedDate = null;
     }
 

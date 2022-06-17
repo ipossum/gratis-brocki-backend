@@ -49,7 +49,7 @@ public class User extends BaseEntity {
     private Set<Item> items;
 
     public User(String username, String email) {
-        super(username);
+        super();
 		this.username = username;
 		this.email = email;
         this.phoneNumber = null;

@@ -36,7 +36,7 @@ public class ItemService {
         if (owner == null) {
             return ResponseEntity.badRequest().build();
         }
-        Item item = new Item(owner.getCreatedBy(), owner, itemCreationDto.getTitle(), itemCreationDto.getDescription(), itemCreationDto.getZipCode(), itemCreationDto.getCategory(), itemCreationDto.getCondition());
+        Item item = new Item(owner, itemCreationDto.getTitle(), itemCreationDto.getDescription(), itemCreationDto.getZipCode(), itemCreationDto.getCategory(), itemCreationDto.getCondition());
         item.setTitle(itemCreationDto.getTitle()); // TODO: introduce mapper (e.g. MapStruct) to handle this conversion
         item.setDescription(itemCreationDto.getDescription());
         itemRepository.save(item);

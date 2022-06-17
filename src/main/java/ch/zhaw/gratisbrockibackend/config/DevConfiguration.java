@@ -36,7 +36,7 @@ public class DevConfiguration implements HasLogger {
     public void test() {
         createUserData();
         createItemData(userRepository.findUserById(1L));
-        //createMessageData();
+        createMessageData(itemRepository.findItemById(1L));
         createPictureData(itemRepository.findItemById(1L));
     }
 
@@ -47,21 +47,19 @@ public class DevConfiguration implements HasLogger {
     }
 
     private void createItemData(User owner) {
-        Item item = new Item("Andy", owner, "Meine Steuerrechnung", "kaum benutzte und nicht bezahlte Steuerrechnung abzugeben", 8000, Category.ChildrenItemCategory, Condition.USED);
+        Item item = new Item(owner, "Meine Steuerrechnung", "kaum benutzte und nicht bezahlte Steuerrechnung abzugeben", 8000, Category.ChildrenItemCategory, Condition.USED);
         itemRepository.save(item);
         //user.addItem(item);   // issues here with FetchType.LAZY in class User
         // -> FetchType.EAGER works, but is not recommended due to potential overhead (use LAZY and JOIN FETCH instead!)
     }
 
-    /*private void createMessageData(){
-        Message message = new Message(item, );
-        message.setMessage("Das ist die erste Nachricht in unserem Forum");
-        message.setCreatedBy("Alex");
+    private void createMessageData(Item item){
+        Message message = new Message(item, "Das ist die erste Nachricht in unserem Forum");
         messageRepository.save(message);
-    }*/
+    }
 
     private void createPictureData(Item item){
-        Picture picture = new Picture("Ben", item, "Euphonium", "https://4.imimg.com/data4/AV/OU/MY-1985769/gold-euphonium-500x500.jpg");
+        Picture picture = new Picture(item, "Euphonium", "https://4.imimg.com/data4/AV/OU/MY-1985769/gold-euphonium-500x500.jpg");
         pictureRepository.save(picture);
     }
 }

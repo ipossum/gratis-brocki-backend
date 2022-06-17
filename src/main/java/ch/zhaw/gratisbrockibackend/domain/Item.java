@@ -45,8 +45,8 @@ public class Item extends BaseEntity {
     @OneToMany (mappedBy = "item")
     private List<Message> messages;
 
-    public Item(String createdBy, User owner, String title, String description, int zipCode, Category category, Condition condition) {
-        super(createdBy); // TODO: replace with user id
+    public Item(User owner, String title, String description, int zipCode, Category category, Condition condition) {
+        super();
         this.owner = owner;
         this.title = title;
         this.description = description;
