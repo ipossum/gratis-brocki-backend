@@ -26,7 +26,7 @@ public class UserController {
         return userService.getUser(id);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/")
     public UserDto registerNewUser(@RequestBody UserCreationDto userCreationDto) throws UserAlreadyExistsException {
         return userService.registerNewUser(userCreationDto);
     }
