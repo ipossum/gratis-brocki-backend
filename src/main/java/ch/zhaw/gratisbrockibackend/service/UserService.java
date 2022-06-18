@@ -4,9 +4,10 @@ import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.UserDto;
+import ch.zhaw.gratisbrockibackend.dto.UserUpdateDto;
 import ch.zhaw.gratisbrockibackend.mapper.UserMapper;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
-
+import ch.zhaw.gratisbrockibackend.utils.UserValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,59 +15,55 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @AllArgsConstructor
 @Service
 @Transactional
-public class UserService { // TODO: remove "@Autowired"?
+public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserDto registerNewUser(final UserCreationDto userCreationDto) throws UserAlreadyExistsException {
-        if (emailExists(userCreationDto.getEmail())) {
-            throw new UserAlreadyExistsException("An account with this email address already exists: " + userCreationDto.getEmail());
-        }
-        final User user = new User(userCreationDto.getUsername(), userCreationDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
-        return convertEntityToDto(userRepository.save(user));
-    }
+    private final UserMapper userMapper;
 
-    public List<UserDto> getUsers() {
-        return userRepository.findAll()
-                .stream()
-                .map(this::convertEntityToDto)
-                .collect(Collectors.toList());
+    private final UserValidator userValidator;
+
+    public UserDto registerNewUser(final UserCreationDto userCreationDto) {
+        try {
+            userValidator.checkCredentials(userCreationDto);
+            User user = userMapper.toUser(userCreationDto);
+            user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
+            userRepository.save(user);
+            return userMapper.toUserDto(user);
+        } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public UserDto getUser(Long id) {
         try {
-            return convertEntityToDto(userRepository.findUserById(id));
+            return userMapper.toUserDto(userRepository.findUserById(id));
         } catch (HttpClientErrorException.BadRequest e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public void updateUser(Long id, UserDto userDto) {
-        User user;
+    public UserDto updateUser(Long id, UserUpdateDto userUpdateDto) {
         try {
-            user = userRepository.findUserById(id);
-            if(validCredentials(user)) {
-                user.setEmail(userDto.getEmail());
-                user.setPhoneNumber(userDto.getPhoneNumber());
-                userRepository.save(user);
-            }
+            User user = userRepository.findUserById(id);
+            userValidator.checkCredentials(userUpdateDto, user);
+            user.setUsername(userUpdateDto.getUsername());
+            user.setEmail(userUpdateDto.getEmail());
+            user.setPassword(passwordEncoder.encode(userUpdateDto.getPassword()));
+            user.setPhoneNumber(userUpdateDto.getPhoneNumber());
+            userRepository.save(user);
+            return userMapper.toUserDto(user);
         } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException e) {
             e.printStackTrace();
-            //return null;
+            return null;
         }
-        //return convertEntityToDto(userRepository.findUserByID(id));
     }
 
     public void deleteUser(Long id) {
@@ -76,24 +73,4 @@ public class UserService { // TODO: remove "@Autowired"?
             e.printStackTrace();
         }
     }
-
-    private UserDto convertEntityToDto(User user) { // TODO: replace with mapper
-        UserDto userDto = new UserDto();
-        userDto.setEmail(user.getEmail());
-        userDto.setPhoneNumber(user.getPhoneNumber());
-        userDto.setUsername(user.getUsername());
-        return userDto;
-    }
-
-    public boolean validCredentials(User user) throws UserAlreadyExistsException {
-        if (userRepository.findUserByEmail(user.getEmail()) != null){
-            throw new UserAlreadyExistsException("An account with this email address already exists: " + user.getEmail());
-        }
-        return true;
-    }
-
-    private boolean emailExists(final String email) {
-        return userRepository.findUserByEmail(email) != null;
-    }
-
 }
