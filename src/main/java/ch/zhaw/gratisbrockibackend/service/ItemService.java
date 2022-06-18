@@ -1,14 +1,15 @@
 package ch.zhaw.gratisbrockibackend.service;
 
 import ch.zhaw.gratisbrockibackend.domain.Item;
-import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.ItemCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.ItemDto;
+import ch.zhaw.gratisbrockibackend.dto.ItemUpdateDto;
+import ch.zhaw.gratisbrockibackend.mapper.ItemMapper;
 import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
-
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+
+    private final ItemMapper itemMapper;
 
     public List<ItemDto> getItems() {
         return itemRepository.findAll()
@@ -30,17 +33,41 @@ public class ItemService {
         return convertEntityToDto(itemRepository.findItemById(id));
     }
 
-    public ResponseEntity<ItemCreationDto> createNewItem(ItemCreationDto itemCreationDto) {
-        User owner = itemCreationDto.getOwner();
+    public ResponseEntity<ItemDto> createNewItem(ItemCreationDto itemCreationDto) {
+        /*User owner = itemCreationDto.getOwner();
 
         if (owner == null) {
             return ResponseEntity.badRequest().build();
+        }*/
+        try {
+            // TODO: add some validation logic with itemValidator
+            Item item = itemMapper.toItem(itemCreationDto);
+            itemRepository.save(item);
+            return ResponseEntity.ok(itemMapper.toItemDto(item));
+        } catch (HttpClientErrorException.BadRequest e) {
+            e.printStackTrace();
+            return null;
         }
-        Item item = new Item(owner, itemCreationDto.getTitle(), itemCreationDto.getDescription(), itemCreationDto.getZipCode(), itemCreationDto.getCategory(), itemCreationDto.getCondition());
-        item.setTitle(itemCreationDto.getTitle()); // TODO: introduce mapper (e.g. MapStruct) to handle this conversion
-        item.setDescription(itemCreationDto.getDescription());
+    }
+
+    public ItemDto updateItem(Long id, ItemUpdateDto itemUpdateDto) {
+        Item item = itemRepository.findItemById(id);
+        // TODO: add some validation logic with itemValidator
+        item.setTitle(itemUpdateDto.getTitle());
+        item.setDescription(itemUpdateDto.getDescription());
+        item.setZipCode(itemUpdateDto.getZipCode());
+        item.setCategory(itemUpdateDto.getCategory());
+        item.setCondition(itemUpdateDto.getCondition());
         itemRepository.save(item);
-        return ResponseEntity.ok(itemCreationDto);
+        return itemMapper.toItemDto(item);
+    }
+
+    public void deleteItem(Long id) {
+        try {
+            itemRepository.deleteById(id);
+        } catch (HttpClientErrorException.BadRequest e) {
+            e.printStackTrace();
+        }
     }
 
     private ItemDto convertEntityToDto(Item item) {
