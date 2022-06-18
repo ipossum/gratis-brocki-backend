@@ -1,14 +1,11 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
-import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
 import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.UserDto;
 import ch.zhaw.gratisbrockibackend.dto.UserUpdateDto;
 import ch.zhaw.gratisbrockibackend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @AllArgsConstructor
 @RequestMapping("api/v1/users")
@@ -23,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public UserDto registerNewUser(@RequestBody UserCreationDto userCreationDto) throws UserAlreadyExistsException {
+    public UserDto registerNewUser(@RequestBody UserCreationDto userCreationDto) {
         return userService.registerNewUser(userCreationDto);
     }
     @PutMapping("/{id}")
