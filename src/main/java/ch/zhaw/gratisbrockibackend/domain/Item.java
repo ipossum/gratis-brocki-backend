@@ -11,8 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @ToString
@@ -40,10 +40,10 @@ public class Item extends BaseEntity {
     private User owner;
 
     @OneToMany(mappedBy = "item")
-    private HashSet<Picture> pictures;
+    private Set<Picture> pictures;
 
     @OneToMany (mappedBy = "item")
-    private LinkedList<Message> messages;
+    private List<Message> messages;
 
 }
 
