@@ -6,7 +6,7 @@ import ch.zhaw.gratisbrockibackend.domain.enums.Condition;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,6 +17,6 @@ public class ItemUpdateDto {
     private int zipCode;
     private Category category;
     private Condition condition;
-    private HashSet<PictureDto> pictures;
+    private Set<PictureDto> pictures;
 
 }
