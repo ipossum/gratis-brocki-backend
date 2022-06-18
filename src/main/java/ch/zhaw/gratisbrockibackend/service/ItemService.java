@@ -25,12 +25,12 @@ public class ItemService {
     public List<ItemDto> getItems() {
         return itemRepository.findAll()
                 .stream()
-                .map(this::convertEntityToDto)
+                .map(itemMapper::toItemDto)
                 .collect(Collectors.toList());
     }
 
     public ItemDto getItem(Long id) {
-        return convertEntityToDto(itemRepository.findItemById(id));
+        return itemMapper.toItemDto(itemRepository.findItemById(id));
     }
 
     public ResponseEntity<ItemDto> createNewItem(ItemCreationDto itemCreationDto) {
@@ -68,13 +68,6 @@ public class ItemService {
         } catch (HttpClientErrorException.BadRequest e) {
             e.printStackTrace();
         }
-    }
-
-    private ItemDto convertEntityToDto(Item item) {
-        ItemDto itemDto = new ItemDto();
-        itemDto.setTitle(item.getTitle());
-        itemDto.setDescription(item.getDescription());
-        return itemDto;
     }
 
 }
