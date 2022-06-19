@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -39,10 +36,10 @@ public class Item extends BaseEntity {
     @ManyToOne
     private User owner;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER)
     private Set<Picture> pictures;
 
-    @OneToMany (mappedBy = "item")
+    @OneToMany (mappedBy = "item", fetch = FetchType.EAGER)
     private List<Message> messages;
 
 }

@@ -1,15 +1,11 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
 import ch.zhaw.gratisbrockibackend.domain.enums.Role;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @ToString
@@ -40,7 +36,7 @@ public class User extends BaseEntity {
 
 	public boolean enabled;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Item> items;
 
 
