@@ -1,13 +1,11 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.Instant;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -21,16 +19,16 @@ public abstract class BaseEntity {
     protected Long id;
 
     @Column(nullable = false, updatable = false)
-    protected Date createdDate;
+    protected OffsetDateTime createdDate;
 
     @Column
-    protected Date lastModifiedDate;
+    protected OffsetDateTime lastModifiedDate;
 
     @Column
-    protected String archivedDate;
+    protected OffsetDateTime archivedDate;
 
     public BaseEntity () {
-        this.createdDate = Date.from(Instant.now());
+        this.createdDate = OffsetDateTime.now();
         this.lastModifiedDate = null;
         this.archivedDate = null;
     }
