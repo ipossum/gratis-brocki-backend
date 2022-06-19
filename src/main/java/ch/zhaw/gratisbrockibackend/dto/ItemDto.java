@@ -12,6 +12,7 @@ import java.util.Set;
 @Setter
 public class ItemDto {
 
+    private Long id;
     private String title;
     private String description;
     private int zipCode;
