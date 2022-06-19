@@ -3,44 +3,74 @@ package ch.zhaw.gratisbrockibackend.service;
 import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
+import ch.zhaw.gratisbrockibackend.dto.UserDto;
+import ch.zhaw.gratisbrockibackend.dto.UserUpdateDto;
+import ch.zhaw.gratisbrockibackend.mapper.UserMapper;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
-
+import ch.zhaw.gratisbrockibackend.utils.UserValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
-import java.util.List;
-
+@AllArgsConstructor
 @Service
 @Transactional
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User registerNewUser(final UserCreationDto userCreationDto) throws UserAlreadyExistsException {
-        if (emailExists(userCreationDto.getEmail())) {
-            throw new UserAlreadyExistsException("An account with this email address already exists: " + userCreationDto.getEmail());
+    private final UserMapper userMapper;
+
+    private final UserValidator userValidator;
+
+    public UserDto registerNewUser(final UserCreationDto userCreationDto) {
+        try {
+            userValidator.checkCredentials(userCreationDto);
+            User user = userMapper.toUser(userCreationDto);
+            user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
+            userRepository.save(user);
+            return userMapper.toUserDto(user);
+        } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException e) {
+            e.printStackTrace();
+            return null;
         }
-        final User user = new User(userCreationDto.getUsername(), userCreationDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
-        return userRepository.save(user);
     }
 
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public UserDto getUser(Long id) {
+        try {
+            return userMapper.toUserDto(userRepository.findUserById(id));
+        } catch (HttpClientErrorException.BadRequest e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public User getUser(Long id) {
-        return userRepository.findUserById(id);
+    public UserDto updateUser(Long id, UserUpdateDto userUpdateDto) {
+        try {
+            User user = userRepository.findUserById(id);
+            userValidator.checkCredentials(userUpdateDto, user);
+            user.setUsername(userUpdateDto.getUsername());
+            user.setEmail(userUpdateDto.getEmail());
+            user.setPassword(passwordEncoder.encode(userUpdateDto.getPassword()));
+            user.setPhoneNumber(userUpdateDto.getPhoneNumber());
+            userRepository.save(user);
+            return userMapper.toUserDto(user);
+        } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    private boolean emailExists(final String email) {
-        return userRepository.findUserByEmail(email) != null;
+    public void deleteUser(Long id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (HttpClientErrorException.BadRequest e) {
+            e.printStackTrace();
+        }
     }
-
 }

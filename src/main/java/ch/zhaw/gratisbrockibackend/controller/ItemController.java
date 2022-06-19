@@ -1,45 +1,42 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
-import ch.zhaw.gratisbrockibackend.domain.Item;
+import ch.zhaw.gratisbrockibackend.dto.ItemCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.ItemDto;
-import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
+import ch.zhaw.gratisbrockibackend.dto.ItemUpdateDto;
 import ch.zhaw.gratisbrockibackend.service.ItemService;
-
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RequestMapping("api/v1/items")
 @RestController
 public class ItemController {
 
     private final ItemService itemService;
 
-    @Autowired
-    ItemRepository itemRepository;
-
-    @Autowired
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
-    }
-
-    @GetMapping
-    public List<Item> getItems(){
+    @GetMapping("/")
+    public List<ItemDto> getItems() {
         return itemService.getItems();
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<ItemDto> create(@RequestBody Item item) {
-        if(item.getOwner()==null) {
-            return ResponseEntity.badRequest().build();
-        }
-        itemRepository.save(item);
-        ItemDto itemDto = new ItemDto();
-        BeanUtils.copyProperties(item, itemDto);
-        return ResponseEntity.ok(itemDto);
+    @GetMapping("/{id}")
+    public ItemDto getItem(@PathVariable("id") Long id) {
+        return itemService.getItem(id);
     }
 
+    @PostMapping("/")
+    public ResponseEntity<ItemDto> createNewItem(@RequestBody ItemCreationDto itemCreationDto) {
+        return itemService.createNewItem(itemCreationDto);
+    }
+    @PutMapping("/{id}")
+    public ItemDto updateItem(@PathVariable("id") Long id, @RequestBody ItemUpdateDto itemUpdateDto) {
+        return itemService.updateItem(id, itemUpdateDto);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteItem(@PathVariable("id") Long id) {
+        itemService.deleteItem(id);
+    }
 }

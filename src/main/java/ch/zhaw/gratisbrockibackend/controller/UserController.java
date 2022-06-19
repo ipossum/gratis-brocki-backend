@@ -1,57 +1,36 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
-import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
-import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.UserDto;
-import ch.zhaw.gratisbrockibackend.repository.UserRepository;
+import ch.zhaw.gratisbrockibackend.dto.UserUpdateDto;
 import ch.zhaw.gratisbrockibackend.service.UserService;
-
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@AllArgsConstructor
 @RequestMapping("api/v1/users")
 @RestController
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @GetMapping
-    public List<User> getUsers(){
-        return userService.getUsers();
-    }
-
-    @GetMapping({"{id}"})
-    public User getUser(@PathVariable("id") Long id) {
+    @GetMapping({"/{id}"})
+    public UserDto getUser(@PathVariable("id") Long id) {
         return userService.getUser(id);
     }
 
-    @PostMapping
-    public void addNewUser(@RequestBody UserCreationDto userCreationDto) throws UserAlreadyExistsException {
-        userService.registerNewUser(userCreationDto);
+    @PostMapping("/")
+    public UserDto registerNewUser(@RequestBody UserCreationDto userCreationDto) {
+        return userService.registerNewUser(userCreationDto);
+    }
+    @PutMapping("/{id}")
+    public UserDto updateUser(@PathVariable("id") Long id, @RequestBody UserUpdateDto userUpdateDto) {
+        return userService.updateUser(id, userUpdateDto);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<UserDto> createUser(@RequestBody User user) {
-        if(!user.getPassword().equals(user.getConfirmedPassword())) {
-            return ResponseEntity.badRequest().build();
-        }
-        userRepository.save(user);
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(user, userDto);
-        return ResponseEntity.ok(userDto);
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
     }
 
 }

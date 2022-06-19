@@ -2,15 +2,20 @@ package ch.zhaw.gratisbrockibackend.domain;
 
 import ch.zhaw.gratisbrockibackend.domain.enums.Category;
 import ch.zhaw.gratisbrockibackend.domain.enums.Condition;
-
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.LinkedList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Set;
 
+@NoArgsConstructor
+@ToString
 @Getter
 @Setter
 @Entity
@@ -19,6 +24,7 @@ public class Item extends BaseEntity {
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -27,31 +33,17 @@ public class Item extends BaseEntity {
     @Column(nullable = false)
     private Category category;
 
+    @Column(nullable = false)
     private Condition condition;
-    //private LinkedList<Message> messages;
 
     @ManyToOne
     private User owner;
 
-    //@OneToOne(mappedBy = "item", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "item")
-    private Set<Picture> pictures = new HashSet<>();
+    private Set<Picture> pictures;
 
     @OneToMany (mappedBy = "item")
-    private Set<Message> messages = new HashSet<>();
+    private List<Message> messages;
 
-    @Override
-    public String toString(){
-        return "Item{" +
-                "id: " + id + '\'' +
-                "title: " + title + '\'' +
-                "description: " + description + '\'' +
-                "zip code: " + zipCode + '\'' +
-                "item category: " + category + '\'' +
-                "item condition: " + condition + '\'' +
-                "created date: " + createdDate + '\'' +
-                "owner: " + owner + '\'' +
-                '}';
-    }
 }
 

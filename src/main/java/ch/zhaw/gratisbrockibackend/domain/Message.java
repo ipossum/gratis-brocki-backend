@@ -1,10 +1,14 @@
 package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
+@ToString
 @Getter
 @Setter
 @Entity
@@ -14,10 +18,10 @@ public class Message extends BaseEntity {
     @ManyToOne
     private Item item;
 
-    @Override
-    public String toString(){
-        return "Message{" +
-                "message: " + message + '\'' +
-                '}';
+    public Message(Item item, String message) {
+        super();
+        this.item = item;
+        this.message = message;
     }
+
 }
