@@ -1,11 +1,11 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
-import ch.zhaw.gratisbrockibackend.domain.Picture;
+import ch.zhaw.gratisbrockibackend.dto.PictureCreationDto;
+import ch.zhaw.gratisbrockibackend.dto.PictureDto;
 import ch.zhaw.gratisbrockibackend.service.PictureService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +17,17 @@ public class PictureController {
     private final PictureService pictureService;
 
     @GetMapping
-    public List<Picture> getPictures(){
+    public List<PictureDto> getPictures(){
         return pictureService.getPictures();
+    }
+
+    @PostMapping
+    public ResponseEntity<PictureDto> addNewPicture(@RequestBody PictureCreationDto pictureCreationDto){
+        return pictureService.addNewPicture(pictureCreationDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePicture(@PathVariable("id") Long id) {
+        pictureService.deletePicture(id);
     }
 }

@@ -5,9 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PictureDto {
+public class PictureCreationDto {
 
-    private Long id;
     private String name;
     private String url;
     private Long itemId;

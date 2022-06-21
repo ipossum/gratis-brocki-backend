@@ -26,7 +26,7 @@ public class ItemService {
         return itemRepository.findAll()
                 .stream()
                 .map(itemMapper::toItemDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public ItemDto getItem(Long id) {

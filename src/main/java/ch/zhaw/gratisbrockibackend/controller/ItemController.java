@@ -17,7 +17,7 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<ItemDto> getItems() {
         return itemService.getItems();
     }
@@ -27,7 +27,7 @@ public class ItemController {
         return itemService.getItem(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<ItemDto> createNewItem(@RequestBody ItemCreationDto itemCreationDto) {
         return itemService.createNewItem(itemCreationDto);
     }
