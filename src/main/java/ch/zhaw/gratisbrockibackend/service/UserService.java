@@ -1,5 +1,6 @@
 package ch.zhaw.gratisbrockibackend.service;
 
+import ch.zhaw.gratisbrockibackend.auth.InvalidPasswordException;
 import ch.zhaw.gratisbrockibackend.auth.UserAlreadyExistsException;
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
@@ -35,7 +36,7 @@ public class UserService {
             user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
             userRepository.save(user);
             return userMapper.toUserDto(user);
-        } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException e) {
+        } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException | InvalidPasswordException e) {
             e.printStackTrace();
             return null;
         }
@@ -60,7 +61,7 @@ public class UserService {
             user.setPhoneNumber(userUpdateDto.getPhoneNumber());
             userRepository.save(user);
             return userMapper.toUserDto(user);
-        } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException e) {
+        } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException | InvalidPasswordException e) {
             e.printStackTrace();
             return null;
         }
