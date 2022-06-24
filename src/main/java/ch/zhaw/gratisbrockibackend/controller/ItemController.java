@@ -32,17 +32,23 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ItemDto getItem(@PathVariable("id") Long id) {
-        return itemService.getItem(id);
+        ItemDto itemDto = itemMapper.toItemDto(itemService.getItem(id));
+        return itemDto;
     }
 
     @PostMapping
     public ResponseEntity<ItemDto> createNewItem(@RequestBody ItemCreationDto itemCreationDto) {
-        return itemService.createNewItem(itemCreationDto);
+        Item item = itemMapper.toItem(itemCreationDto);
+        ItemDto itemDto = itemMapper.toItemDto(itemService.createNewItem(item));
+        return ResponseEntity.ok(itemDto);
     }
+
     @PutMapping("/{id}")
     public ItemDto updateItem(@PathVariable("id") Long id, @RequestBody ItemUpdateDto itemUpdateDto) {
-        return itemService.updateItem(id, itemUpdateDto);
+        ItemDto itemDto = itemMapper.toItemDto(itemService.updateItem(id, itemUpdateDto));
+        return itemDto;
     }
+
     @DeleteMapping("/{id}")
     public void deleteItem(@PathVariable("id") Long id) {
         itemService.deleteItem(id);

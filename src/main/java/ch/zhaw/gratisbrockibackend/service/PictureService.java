@@ -1,15 +1,13 @@
 package ch.zhaw.gratisbrockibackend.service;
 
 import ch.zhaw.gratisbrockibackend.domain.Picture;
-import ch.zhaw.gratisbrockibackend.dto.PictureCreationDto;
-import ch.zhaw.gratisbrockibackend.dto.PictureDto;
+import ch.zhaw.gratisbrockibackend.dto.PictureUpdateDto;
 import ch.zhaw.gratisbrockibackend.mapper.PictureMapper;
 import ch.zhaw.gratisbrockibackend.repository.PictureRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -25,16 +23,22 @@ public class PictureService {
         return pictureRepository.findAll(spec, page);
     }
 
-    public ResponseEntity<PictureDto> addNewPicture(PictureCreationDto pictureCreationDto) {
+    public Picture addNewPicture(Picture picture) {
         try {
             // TODO: add some validation logic with pictureValidator
-            Picture picture = pictureMapper.toPicture(pictureCreationDto);
-            pictureRepository.save(picture);
-            return ResponseEntity.ok(pictureMapper.toPictureDto(picture));
+            return pictureRepository.save(picture);
         } catch (HttpClientErrorException.BadRequest e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().build();
+            return null;
         }
+    }
+
+    public Picture updatePicture(Long id, PictureUpdateDto pictureUpdateDto) {
+        Picture picture = pictureRepository.findPictureById(id);
+        // TODO: add some validation logic with pictureValidator
+        picture.setName(pictureUpdateDto.getName());
+        picture.setUrl(pictureUpdateDto.getUrl());
+        return pictureRepository.save(picture);
     }
 
     public void deletePicture(Long id) {
