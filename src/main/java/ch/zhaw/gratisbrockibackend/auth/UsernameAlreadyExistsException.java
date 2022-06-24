@@ -4,13 +4,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Username already exists")
-public class UserAlreadyExistsException extends Exception{
+public class UsernameAlreadyExistsException extends Exception {
 
-    public UserAlreadyExistsException(){
+    public UsernameAlreadyExistsException() {
         super();
     }
 
-    public UserAlreadyExistsException(String message){
+    public UsernameAlreadyExistsException(String message) {
         super(message);
     }
+
 }

@@ -29,15 +29,15 @@ public class UserService {
 
     private final UserValidator userValidator;
 
-    public UserDto registerNewUser(final UserCreationDto userCreationDto) {
+    public User registerNewUser(final UserCreationDto userCreationDto) throws HttpClientErrorException, UserAlreadyExistsException, InvalidPasswordException {
         try {
             userValidator.checkCredentials(userCreationDto);
             User user = userMapper.toUser(userCreationDto);
             user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
             userRepository.save(user);
-            return userMapper.toUserDto(user);
+            return user;
+            //return userMapper.toUserDto(user);
         } catch (HttpClientErrorException.BadRequest | UserAlreadyExistsException | InvalidPasswordException e) {
-            e.printStackTrace();
             return null;
         }
     }
