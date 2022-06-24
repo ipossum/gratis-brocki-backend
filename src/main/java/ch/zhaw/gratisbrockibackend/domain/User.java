@@ -44,9 +44,4 @@ public class User extends BaseEntity {
         super();
         this.role = Role.USER;
 	}
-
-    public void addItem (Item item){
-        items.add(item);
-    }
-
 }
