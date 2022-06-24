@@ -64,7 +64,7 @@ public class DevConfiguration implements HasLogger {
         item1.setTitle("Meine Steuerrechnung");
         item1.setDescription("kaum benutzte und nicht bezahlte Steuerrechnung abzugeben");
         item1.setZipCode(8000);
-        item1.setCategory(Category.ChildrenItemCategory);
+        item1.setCategory(Category.CHILDREN);
         item1.setCondition(Condition.USED);
         item1.setOwner(owner1);
         itemRepository.save(item1);
@@ -73,7 +73,7 @@ public class DevConfiguration implements HasLogger {
         item2.setTitle("Laptop");
         item2.setDescription("Gebraucht, aber noch super Zustand");
         item2.setZipCode(5001);
-        item2.setCategory(Category.HouseholdItemCategory);
+        item2.setCategory(Category.HOUSEHOLD);
         item2.setCondition(Condition.USED);
         item2.setOwner(owner1);
         itemRepository.save(item2);
@@ -82,7 +82,7 @@ public class DevConfiguration implements HasLogger {
         item3.setTitle("Velo");
         item3.setDescription("Total kaputt");
         item3.setZipCode(8088);
-        item3.setCategory(Category.HouseholdItemCategory);
+        item3.setCategory(Category.HOUSEHOLD);
         item3.setCondition(Condition.DEFECTIVE);
         item3.setOwner(owner2);
         itemRepository.save(item3);
@@ -91,7 +91,7 @@ public class DevConfiguration implements HasLogger {
         item4.setTitle("Rucksack");
         item4.setDescription("Alter Militärrucksack");
         item4.setZipCode(7001);
-        item4.setCategory(Category.OtherItemCategory);
+        item4.setCategory(Category.OTHER);
         item4.setCondition(Condition.USED);
         item4.setOwner(owner2);
         itemRepository.save(item4);
