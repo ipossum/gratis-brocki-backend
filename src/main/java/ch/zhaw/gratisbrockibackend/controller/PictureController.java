@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -24,23 +23,21 @@ public class PictureController {
 
     private final PictureMapper pictureMapper;
 
+    @PostMapping
+    public PictureDto addNewPicture(@RequestBody PictureCreationDto pictureCreationDto){
+        Picture picture = pictureMapper.toPicture(pictureCreationDto);
+        return pictureMapper.toPictureDto(pictureService.addNewPicture(picture));
+    }
+
     @GetMapping
     public Page<PictureDto> getPictures(@Filter Specification<Picture> spec, Pageable page){
         return pictureService.getPictures(spec, page)
                 .map(pictureMapper::toPictureDto);
     }
 
-    @PostMapping
-    public ResponseEntity<PictureDto> addNewPicture(@RequestBody PictureCreationDto pictureCreationDto){
-        Picture picture = pictureMapper.toPicture(pictureCreationDto);
-        PictureDto pictureDto = pictureMapper.toPictureDto(pictureService.addNewPicture(picture));
-        return ResponseEntity.ok(pictureDto);
-    }
-
     @PutMapping("/{id}")
     public PictureDto updatePicture(@PathVariable("id") Long id, @RequestBody PictureUpdateDto pictureUpdateDto) {
-        PictureDto pictureDto = pictureMapper.toPictureDto(pictureService.updatePicture(id, pictureUpdateDto));
-        return pictureDto;
+        return pictureMapper.toPictureDto(pictureService.updatePicture(id, pictureUpdateDto));
     }
 
     @DeleteMapping("/{id}")

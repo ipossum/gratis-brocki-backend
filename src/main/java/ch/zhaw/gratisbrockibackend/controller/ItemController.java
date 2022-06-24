@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -24,6 +23,12 @@ public class ItemController {
 
     private final ItemMapper itemMapper;
 
+    @PostMapping
+    public ItemDto createNewItem(@RequestBody ItemCreationDto itemCreationDto) {
+        Item item = itemMapper.toItem(itemCreationDto);
+        return itemMapper.toItemDto(itemService.createNewItem(item));
+    }
+
     @GetMapping
     public Page<ItemDto> getItems(@Filter Specification<Item> spec, Pageable page) {
         return itemService.getItems(spec, page)
@@ -32,21 +37,12 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ItemDto getItem(@PathVariable("id") Long id) {
-        ItemDto itemDto = itemMapper.toItemDto(itemService.getItem(id));
-        return itemDto;
-    }
-
-    @PostMapping
-    public ResponseEntity<ItemDto> createNewItem(@RequestBody ItemCreationDto itemCreationDto) {
-        Item item = itemMapper.toItem(itemCreationDto);
-        ItemDto itemDto = itemMapper.toItemDto(itemService.createNewItem(item));
-        return ResponseEntity.ok(itemDto);
+        return itemMapper.toItemDto(itemService.getItem(id));
     }
 
     @PutMapping("/{id}")
     public ItemDto updateItem(@PathVariable("id") Long id, @RequestBody ItemUpdateDto itemUpdateDto) {
-        ItemDto itemDto = itemMapper.toItemDto(itemService.updateItem(id, itemUpdateDto));
-        return itemDto;
+        return itemMapper.toItemDto(itemService.updateItem(id, itemUpdateDto));
     }
 
     @DeleteMapping("/{id}")
