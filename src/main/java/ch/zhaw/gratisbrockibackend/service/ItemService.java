@@ -7,12 +7,12 @@ import ch.zhaw.gratisbrockibackend.dto.ItemUpdateDto;
 import ch.zhaw.gratisbrockibackend.mapper.ItemMapper;
 import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -22,11 +22,9 @@ public class ItemService {
 
     private final ItemMapper itemMapper;
 
-    public List<ItemDto> getItems() {
-        return itemRepository.findAll()
-                .stream()
-                .map(itemMapper::toItemDto)
-                .toList();
+    public Page<Item> getItems (Specification<Item> spec, Pageable page){
+        // TODO: add some validation (e.g. make sure not all items are returned, but only the first page as default!)
+        return itemRepository.findAll(spec, page);
     }
 
     public ItemDto getItem(Long id) {

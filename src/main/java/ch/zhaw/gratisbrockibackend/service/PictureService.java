@@ -6,11 +6,12 @@ import ch.zhaw.gratisbrockibackend.dto.PictureDto;
 import ch.zhaw.gratisbrockibackend.mapper.PictureMapper;
 import ch.zhaw.gratisbrockibackend.repository.PictureRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-
-import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -19,11 +20,9 @@ public class PictureService {
 
     private final PictureMapper pictureMapper;
 
-    public List<PictureDto> getPictures() {
-        return pictureRepository.findAll()
-                .stream()
-                .map(pictureMapper::toPictureDto)
-                .toList();
+    public Page<Picture> getPictures (Specification<Picture> spec, Pageable page){
+        // TODO: add some validation (e.g. disallow anything but userId in specification?)
+        return pictureRepository.findAll(spec, page);
     }
 
     public ResponseEntity<PictureDto> addNewPicture(PictureCreationDto pictureCreationDto) {
