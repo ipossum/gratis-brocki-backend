@@ -19,7 +19,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping
-    public List<ItemDto> getItems() {
+    public List<ItemDto> getItems(@RequestParam(required = false) String search) {
         return itemService.getItems();
     }
 
