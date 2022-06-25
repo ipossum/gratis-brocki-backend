@@ -1,13 +1,13 @@
 package ch.zhaw.gratisbrockibackend.domain.enums;
 
 public enum Category {
-    ChildrenItemCategory("ChildrenItemCategory"),
-    ClothingItemCategory("ClothingItemCategory"),
-    GardenItemCategory("GardenItemCategory"),
-    HouseholdItemCategory("HouseholdItemCategory"),
-    SportItemCategory("SportItemCategory"),
-    VehicleItemCategory("VehicleItemCategory"),
-    OtherItemCategory("OtherItemCategory");
+    CHILDREN("Children"),
+    CLOTHING("Clothing"),
+    GARDEN("Garden"),
+    HOUSEHOLD("Household"),
+    SPORT("Sport"),
+    VEHICLE("Vehicle"),
+    OTHER("Other");
 
     private final String value;
 

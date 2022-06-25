@@ -1,10 +1,13 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
+import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.dto.UserCreationDto;
 import ch.zhaw.gratisbrockibackend.dto.UserDto;
 import ch.zhaw.gratisbrockibackend.dto.UserUpdateDto;
+import ch.zhaw.gratisbrockibackend.mapper.UserMapper;
 import ch.zhaw.gratisbrockibackend.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -15,18 +18,22 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/{id}")
-    public UserDto getUser(@PathVariable("id") Long id) {
-        return userService.getUser(id);
-    }
+    private final UserMapper userMapper;
 
     @PostMapping
     public UserDto registerNewUser(@RequestBody UserCreationDto userCreationDto) {
-        return userService.registerNewUser(userCreationDto);
+        User user = userMapper.toUser(userCreationDto);
+        return userMapper.toUserDto(userService.registerNewUser(user));
     }
+
+    @GetMapping("/{id}")
+    public UserDto getUser(@PathVariable("id") Long id) {
+        return userMapper.toUserDto(userService.getUser(id));
+    }
+
     @PutMapping("/{id}")
     public UserDto updateUser(@PathVariable("id") Long id, @RequestBody UserUpdateDto userUpdateDto) {
-        return userService.updateUser(id, userUpdateDto);
+        return userMapper.toUserDto(userService.updateUser(id, userUpdateDto));
     }
 
     @DeleteMapping("/{id}")
