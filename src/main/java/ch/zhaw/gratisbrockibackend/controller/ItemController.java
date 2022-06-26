@@ -43,6 +43,7 @@ public class ItemController {
                 .stream()
                 .map(itemMapper::toItemDto)
                 .toList();
+    }
 
     @GetMapping("/{id}")
     public ItemDto getItem(@PathVariable("id") Long id) {
