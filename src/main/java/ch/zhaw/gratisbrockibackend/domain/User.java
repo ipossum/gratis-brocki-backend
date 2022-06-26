@@ -12,6 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name="users")
 public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true)
