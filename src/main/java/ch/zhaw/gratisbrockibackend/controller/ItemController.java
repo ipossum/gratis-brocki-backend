@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RequestMapping("api/v1/items")
@@ -33,6 +35,14 @@ public class ItemController {
     public Page<ItemDto> getItems(@Filter Specification<Item> spec, Pageable page) {
         return itemService.getItems(spec, page)
                 .map(itemMapper::toItemDto);
+    }
+
+    @GetMapping("/all")
+    public List<ItemDto> getAllItems(@RequestParam(required = false) String search) {
+        return itemService.getAllItems()
+                .stream()
+                .map(itemMapper::toItemDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
