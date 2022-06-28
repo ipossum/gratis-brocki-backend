@@ -36,7 +36,7 @@ public class User extends BaseEntity {
 
 	public boolean enabled;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
     private Set<Item> items;
 
 

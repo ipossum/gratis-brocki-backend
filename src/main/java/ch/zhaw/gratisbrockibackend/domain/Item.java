@@ -36,10 +36,10 @@ public class Item extends BaseEntity {
     @ManyToOne
     private User owner;
 
-    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
     private Set<Picture> pictures;
 
-    @OneToMany (mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
     private List<Message> messages;
 
 }
