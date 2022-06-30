@@ -48,6 +48,12 @@ public class PictureValidator { // TODO: add additional, more sophisticated plau
                 || url.length() <= 20) {
             throw new PictureException("Invalid URL");
         }
+        if (url.length() > 255) {
+            throw new PictureException("URL to long - length must be shorter than 255 signs");
+        }
+        if (!(url.startsWith("https://") || url.startsWith("http://"))) {
+            throw new PictureException("Invalid URL - make sure the url has the right format");
+        }
     }
 
 }
