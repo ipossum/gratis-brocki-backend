@@ -69,5 +69,30 @@ public class ItemValidator { // TODO: add additional, more sophisticated plausib
         if (condition == null) {
             throw new ItemException("Invalid condition");
         }
+
+        /*if (!checkCategory(category)) {
+            throw new ItemException("Invalid category - no match in category found");
+        }
+
+        if (!checkCondition(condition)) {
+            throw new ItemException("Invalid condition - no match in condition found");
+        }*/
+
+    }
+
+    private boolean checkCategory(Category category) {
+        boolean match = false;
+        for (Category value : Category.values()) {
+            match = category.equals(value);
+        }
+        return match;
+    }
+
+    private boolean checkCondition(Condition condition) {
+        boolean match = false;
+        for (Condition value : Condition.values()) {
+            match = condition.equals(value);
+        }
+        return match;
     }
 }
