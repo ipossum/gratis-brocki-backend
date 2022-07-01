@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @ToString
 @Getter
@@ -37,8 +37,7 @@ public class User extends BaseEntity {
 	public boolean enabled;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
-    private Set<Item> items;
-
+    private List<Item> items;
 
     public User() {
         super();

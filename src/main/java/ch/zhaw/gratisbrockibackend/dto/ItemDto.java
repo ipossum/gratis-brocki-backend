@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -19,7 +18,7 @@ public class ItemDto {
     private Category category;
     private Condition condition;
     private Long userId;
-    private Set<PictureDto> pictures;
-    private List<MessageDto> messages;
+    private List<PictureDto> pictures;
+    //private List<MessageDto> messages;
 
 }
