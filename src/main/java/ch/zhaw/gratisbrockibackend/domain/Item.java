@@ -21,7 +21,7 @@ public class Item extends BaseEntity {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1200)
     private String description;
 
     @Column(nullable = false)
