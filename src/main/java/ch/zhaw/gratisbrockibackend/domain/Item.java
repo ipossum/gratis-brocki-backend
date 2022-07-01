@@ -18,13 +18,13 @@ import java.util.Set;
 @Entity
 public class Item extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String title;
 
     @Column(nullable = false, length = 1200)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 4)
     private int zipCode;
 
     @Column(nullable = false)
