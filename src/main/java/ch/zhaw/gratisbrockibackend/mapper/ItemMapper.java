@@ -14,7 +14,7 @@ public interface ItemMapper {
 
     @Mapping(target = "owner.id", source = "userId")
     @Mapping(target = "owner", ignore = true)
-    @Mapping(target = "messages", ignore = true)
+    //@Mapping(target = "messages", ignore = true)
     @Mapping(target = "lastModifiedDate", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdDate", ignore = true)
