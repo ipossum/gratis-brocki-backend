@@ -74,7 +74,7 @@ public class UserValidator { // TODO: add additional, more sophisticated plausib
             throw new UserException("Invalid password - Password must contain letters, numbers and special characters");
         }
         if (username == null
-                || username.length() <= 3 || username.length() > 254) {
+                || username.length() <= 3 || username.length() > 40) {
             throw new UserException("Invalid username");
         }
         if (!(phoneNumber.startsWith("076") ||
@@ -90,7 +90,7 @@ public class UserValidator { // TODO: add additional, more sophisticated plausib
         if (!emailValidation(email)) {
             throw new UserException("Invalid email - your mail address has the wrong format");
         }
-        if (email.length() > 254) {
+        if (email.length() > 60) {
             throw new UserException("Invalid email - your email is too long");
         }
     }

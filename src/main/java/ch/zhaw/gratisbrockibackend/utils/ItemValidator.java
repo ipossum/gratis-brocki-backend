@@ -52,9 +52,15 @@ public class ItemValidator { // TODO: add additional, more sophisticated plausib
                 || title.length() < 3) {
             throw new ItemException("Invalid title — make sure minimum length is 3 characters");
         }
+        if (title.length() > 50) {
+            throw new ItemException("Invalid title - make sure maximum length is 50 characters");
+        }
         if (description == null
                 || description.length() <= 10) {
             throw new ItemException("Invalid description — make sure minimum length is 10 characters");
+        }
+        if (description.length() > 1200) {
+            throw new ItemException("Invalid description - your description is too long");
         }
 
         if (zipCode < 1000
@@ -70,13 +76,13 @@ public class ItemValidator { // TODO: add additional, more sophisticated plausib
             throw new ItemException("Invalid condition");
         }
 
-        /*if (!checkCategory(category)) {
+        if (!checkCategory(category)) {
             throw new ItemException("Invalid category - no match in category found");
         }
 
         if (!checkCondition(condition)) {
             throw new ItemException("Invalid condition - no match in condition found");
-        }*/
+        }
 
     }
 

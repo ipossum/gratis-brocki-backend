@@ -14,10 +14,10 @@ import java.util.Set;
 @Entity
 public class User extends BaseEntity {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 40, unique = true)
     private String username;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, length = 60, unique = true)
 	private String email;
 
     @Column

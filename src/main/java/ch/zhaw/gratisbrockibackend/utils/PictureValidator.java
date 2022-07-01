@@ -44,6 +44,9 @@ public class PictureValidator { // TODO: add additional, more sophisticated plau
                 || name.length() < 3) {
             throw new PictureException("Invalid name — make sure minimum length is 3 characters");
         }
+        if (name.length() > 50) {
+            throw new PictureException("Invalid name - make sure maximum length is 50 characters");
+        }
         if (url == null
                 || url.length() <= 20) {
             throw new PictureException("Invalid URL");
