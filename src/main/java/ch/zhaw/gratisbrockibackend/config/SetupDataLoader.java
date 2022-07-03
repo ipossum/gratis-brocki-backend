@@ -1,6 +1,6 @@
 package ch.zhaw.gratisbrockibackend.config;
 
-/*
+/* TODO: delete this class?
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.domain.Role;
 import ch.zhaw.gratisbrockibackend.repository.RoleRepository;
