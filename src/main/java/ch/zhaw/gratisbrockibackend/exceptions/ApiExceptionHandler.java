@@ -52,4 +52,17 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(apiException, badRequest);
     }
 
+    @ExceptionHandler(FileException.class)
+    public ResponseEntity<Object> handleFileException (FileException e) {
+        HttpStatus badRequest = HttpStatus.BAD_REQUEST;
+
+        ApiException apiException= new ApiException(
+                e.getMessage(),
+                badRequest,
+                OffsetDateTime.now()
+        );
+        return new ResponseEntity<>(apiException, badRequest);
+
+    }
+
 }
