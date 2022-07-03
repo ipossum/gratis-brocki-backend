@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  * Controller to authenticate users.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class JwtAuthenticationController {
 
     private final TokenAuthenticationService tokenAuthenticationService;

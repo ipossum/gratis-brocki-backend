@@ -5,6 +5,7 @@ import ch.zhaw.gratisbrockibackend.dto.UserUpdateDto;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
 import ch.zhaw.gratisbrockibackend.utils.UserValidator;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +19,8 @@ public class UserService {
 
     private final UserValidator userValidator;
 
+    @Autowired
     private final BCryptPasswordEncoder passwordEncoder;
-
-    //private PasswordEncoder passwordEncoder;
 
     public User registerNewUser(User user) {
         userValidator.plausibilityCheck(user);
