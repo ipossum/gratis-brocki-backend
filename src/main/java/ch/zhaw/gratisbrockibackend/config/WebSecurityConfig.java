@@ -61,13 +61,13 @@ public class WebSecurityConfig  {
                     .and().servletApi()
                     .and().headers().cacheControl();
 
-            http.antMatcher("/api/**").authorizeRequests()
-                    .antMatchers("/api/login", "/api/authenticate").permitAll()
-                    .antMatchers("/api/persons/**").hasAnyRole("USER", "ADMIN")
+            http.antMatcher("/api/v1/**").authorizeRequests()
+                    .antMatchers("/api/v1/login", "/api/v1/authenticate").permitAll()
+                    .antMatchers("/api/v1/persons/**").hasAnyRole("USER", "ADMIN")
                     .antMatchers(HttpMethod.GET, "/h2-console/**").permitAll();
 
             http.addFilterBefore(
-                    new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()),
+                    new StatelessLoginFilter("/api/v1/login", tokenAuthenticationService, userDetailsService, authenticationManager()),
                     UsernamePasswordAuthenticationFilter.class);
 
             http.addFilterBefore(
@@ -141,19 +141,19 @@ public class WebSecurityConfig  {
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .authorizeRequests()
-                        .mvcMatchers("/", "/login").permitAll()
-                        .mvcMatchers("/users/**").hasRole("USER")
-                        .mvcMatchers("/stomp-broadcast/**").hasRole("USER")
+                        //.mvcMatchers("/", "/login").permitAll()
+                        //.mvcMatchers("/users/**").hasRole("USER")
+                        //.mvcMatchers("/stomp-broadcast/**").hasRole("USER")
                         .anyRequest().authenticated()
                     .and()
                         .formLogin()
-                        .loginPage("/login")
+                        //.loginPage("/login")
                         .permitAll()
                     .and()
                         .httpBasic()
                     .and()
                         .logout()
-                        .logoutUrl("/logout")
+                        //.logoutUrl("/logout")
                         .logoutSuccessUrl("/");
         }
 
