@@ -35,8 +35,8 @@ public class WebSecurityConfig  {
 
    @Autowired
    public WebSecurityConfig(@Qualifier("appUserDetailsServiceImpl") UserDetailsService userDetailsService,
-                            @Value("${hellorest.auth.secret:secretkey}") String secretKey,
-                            @Value("${hellorest.auth.headername:xauth}") TokenAuthenticationService.AuthHeaderName  authHeaderName) {
+                            @Value("${gratsibrockibackend.auth.secret:secretkey}") String secretKey,
+                            @Value("${gratsibrockibackend.auth.headername:bearer}") TokenAuthenticationService.AuthHeaderName  authHeaderName) {
 
      //   super(true);
         this.userDetailsService = userDetailsService;
