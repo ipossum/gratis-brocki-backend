@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.time.OffsetDateTime;
 
@@ -58,6 +59,21 @@ public class ApiExceptionHandler {
 
         ApiException apiException= new ApiException(
                 e.getMessage(),
+                badRequest,
+                OffsetDateTime.now()
+        );
+        return new ResponseEntity<>(apiException, badRequest);
+
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<Object> handleMaxSizeException (MaxUploadSizeExceededException e) {
+        HttpStatus badRequest = HttpStatus.BAD_REQUEST;
+
+        String message = "Maximum filesize exceeded";
+
+        ApiException apiException= new ApiException(
+                message,
                 badRequest,
                 OffsetDateTime.now()
         );
