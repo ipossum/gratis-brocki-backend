@@ -34,7 +34,7 @@ public class OpenApi30Config {
                         new Components()
                                 .addSecuritySchemes(securitySchemeName,
                                         new SecurityScheme()
-                                                .name(securitySchemeName)
+                                                //.name(securitySchemeName)
                                                 .type(SecurityScheme.Type.HTTP)
                                                 .scheme("bearer")
                                                 .bearerFormat("JWT")

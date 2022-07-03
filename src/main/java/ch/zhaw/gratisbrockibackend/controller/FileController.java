@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -47,18 +49,16 @@ public class FileController {
     }
 
     @GetMapping("/{id}")
-    public byte[] getFile(@PathVariable Long id) {
-        File file = fileService.getFile(id);
-        return file.getData();
+    public File getFile(@PathVariable Long id) {
+        return fileService.getFile(id);
     }
 
-    /*
     @GetMapping
-    public List<FileDto> getListFiles() {
-        List<FileDto> files = fileService.getAllFiles().map(file -> {
+    public List<FileDto> getFiles() {
+        return fileService.getAllFiles().map(file -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("/files/")
+                    .path("/api/v1/files/")
                     .path(file.getId().toString())
                     .toUriString();
             return new FileDto(
@@ -67,8 +67,6 @@ public class FileController {
                     file.getFiletype(),
                     file.getData().length);
         }).collect(Collectors.toList());
-        return files;
     }
-     */
 
 }
