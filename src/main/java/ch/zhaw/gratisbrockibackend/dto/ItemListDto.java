@@ -9,6 +9,6 @@ public class ItemListDto {
 
     private String title;
     private int zipCode;
-    private PictureDto picture;
+    private FileDto picture;
 
 }

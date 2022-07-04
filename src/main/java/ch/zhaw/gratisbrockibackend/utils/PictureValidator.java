@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.utils;
 
 import ch.zhaw.gratisbrockibackend.domain.Picture;
@@ -63,4 +64,4 @@ public class PictureValidator {
         }
     }
 
-}
+}*/

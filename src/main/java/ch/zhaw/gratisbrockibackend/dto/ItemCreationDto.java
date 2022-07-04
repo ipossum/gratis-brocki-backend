@@ -17,6 +17,6 @@ public class ItemCreationDto {
     private Category category;
     private Condition condition;
     private Long userId;
-    private List<PictureDto> pictures;
+    private List<FileDto> pictures;
 
 }

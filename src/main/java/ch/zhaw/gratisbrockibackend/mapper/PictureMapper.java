@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.mapper;
 
 import ch.zhaw.gratisbrockibackend.domain.Item;
@@ -27,3 +28,4 @@ public interface PictureMapper {
 }
 
 
+*/

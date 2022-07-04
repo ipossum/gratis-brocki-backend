@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.dto;
 
 import lombok.Getter;
@@ -13,3 +14,4 @@ public class PictureDto {
     private Long itemId;
 
 }
+*/

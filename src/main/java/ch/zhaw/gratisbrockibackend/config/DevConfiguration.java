@@ -1,21 +1,27 @@
 package ch.zhaw.gratisbrockibackend.config;
 
+import ch.zhaw.gratisbrockibackend.domain.File;
 import ch.zhaw.gratisbrockibackend.domain.Item;
-import ch.zhaw.gratisbrockibackend.domain.Picture;
+//import ch.zhaw.gratisbrockibackend.domain.Picture;
 import ch.zhaw.gratisbrockibackend.domain.User;
 import ch.zhaw.gratisbrockibackend.domain.enums.Category;
 import ch.zhaw.gratisbrockibackend.domain.enums.Condition;
+import ch.zhaw.gratisbrockibackend.repository.FileRepository;
 import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
 import ch.zhaw.gratisbrockibackend.repository.MessageRepository;
-import ch.zhaw.gratisbrockibackend.repository.PictureRepository;
+//import ch.zhaw.gratisbrockibackend.repository.PictureRepository;
 import ch.zhaw.gratisbrockibackend.repository.UserRepository;
 import ch.zhaw.gratisbrockibackend.utils.HasLogger;
+import ch.zhaw.gratisbrockibackend.utils.ImageToByteArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 
 @Configuration
 @Profile("dev")
@@ -28,7 +34,8 @@ public class DevConfiguration implements HasLogger {
     ItemRepository itemRepository;
 
     @Autowired
-    PictureRepository pictureRepository;
+    // PictureRepository pictureRepository;
+    FileRepository fileRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -38,10 +45,11 @@ public class DevConfiguration implements HasLogger {
     }
 
     @PostConstruct
-    public void test() {
+    public void test() throws Exception {
         createUserData();
         createItemData(userRepository.findUserById(1L), userRepository.findUserById(2L), userRepository.findUserById(3L), userRepository.findUserById(4L));
-        createPictureData(itemRepository.findItemById(1L), itemRepository.findItemById(2L), itemRepository.findItemById(3L), itemRepository.findItemById(4L), itemRepository.findItemById(5L), itemRepository.findItemById(6L), itemRepository.findItemById(7L), itemRepository.findItemById(8L), itemRepository.findItemById(9L), itemRepository.findItemById(10L));
+        createImageData(itemRepository.findItemById(1L), itemRepository.findItemById(2L), itemRepository.findItemById(3L), itemRepository.findItemById(4L), itemRepository.findItemById(5L), itemRepository.findItemById(6L), itemRepository.findItemById(7L), itemRepository.findItemById(8L), itemRepository.findItemById(9L), itemRepository.findItemById(10L));
+        // createPictureData(itemRepository.findItemById(1L), itemRepository.findItemById(2L), itemRepository.findItemById(3L), itemRepository.findItemById(4L), itemRepository.findItemById(5L), itemRepository.findItemById(6L), itemRepository.findItemById(7L), itemRepository.findItemById(8L), itemRepository.findItemById(9L), itemRepository.findItemById(10L));
     }
 
     private void createUserData() {
@@ -168,7 +176,7 @@ public class DevConfiguration implements HasLogger {
     }
 
 
-    private void createPictureData(Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8, Item item9, Item item10){
+    /*private void createPictureData(Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8, Item item9, Item item10){
 
         // item 1
         Picture picture1 = new Picture();
@@ -240,6 +248,88 @@ public class DevConfiguration implements HasLogger {
         picture10.setItem(item10);
         pictureRepository.save(picture10);
 
-    }
-}
+    }*/
 
+    private void createImageData(Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8, Item item9, Item item10) throws Exception {
+
+        // item 1
+        File picture1 = new File();
+        picture1.setFilename("Steuerrechnung");
+        picture1.setFiletype("image/jpeg");
+        picture1.setData(convert("src/main/resources/samples/Steuerrechnung.jpg"));
+        picture1.setItem(item1);
+        fileRepository.save(picture1);
+
+//        // item 2
+//        Picture picture2 = new Picture();
+//        picture2.setName("Notebook");
+//        picture2.setUrl("https://bilder.pcwelt.de/4307875_620x310_r.webp");
+//        picture2.setItem(item2);
+//        pictureRepository.save(picture2);
+//
+//        // item 3
+//        Picture picture3 = new Picture();
+//        picture3.setName("Velo");
+//        picture3.setUrl("https://frontend.syunify.de/syimagesrv/show?imgroot=GPRAG&ColorSku=110491&imgSize=620&qlty=3&RecRef=60f6c0bc977f460a39b184c8");
+//        picture3.setItem(item3);
+//        pictureRepository.save(picture3);
+//
+//        // item 4
+//        Picture picture4 = new Picture();
+//        picture4.setName("Rucksack");
+//        picture4.setUrl("https://cdn.shopify.com/s/files/1/0250/8090/products/Rolltop_Rucksack-Backpacks-13160-01_Black_930x1395_crop_center.jpg?v=1652789731");
+//        picture4.setItem(item4);
+//        pictureRepository.save(picture4);
+//
+//        // item 5
+//        Picture picture5 = new Picture();
+//        picture5.setName("Smartphone");
+//        picture5.setUrl("https://www.inside-digital.de/img/smartphone-kaputt-1200x900.jpg");
+//        picture5.setItem(item5);
+//        pictureRepository.save(picture5);
+//
+//        // item 6
+//        Picture picture6 = new Picture();
+//        picture6.setName("Kinderwagen");
+//        picture6.setUrl("https://baby-lucien.de/media/catalog/product/cache/fd44668e021234ab2030210c7e541d99/s/t/stylo_class_sp261.jpg");
+//        picture6.setItem(item6);
+//        pictureRepository.save(picture6);
+//
+//        // item 7
+//        Picture picture7 = new Picture();
+//        picture7.setName("Geburtstagskuchen");
+//        picture7.setUrl("https://media-cdn.tripadvisor.com/media/photo-s/13/90/db/da/nusstorte-nach-halfte.jpg");
+//        picture7.setItem(item7);
+//        pictureRepository.save(picture7);
+//
+//        // item 8
+//        Picture picture8 = new Picture();
+//        picture8.setName("Schubkarre");
+//        picture8.setUrl("https://www.spielwarenzauber.ch/78146-large_default/schubkarre-metall.jpg");
+//        picture8.setItem(item8);
+//        pictureRepository.save(picture8);
+//
+//        // item 9
+//        Picture picture9 = new Picture();
+//        picture9.setName("Skateboard");
+//        picture9.setUrl("https://cdn.skatedeluxe.com/thumb/jCYj7mCYE5BNFY9lQ-SCRuLyMQ4=/fit-in/600x700/filters:fill(white):brightness(-4)/product/155392-0-RIPNDIP-LordNermal85.jpg");
+//        picture9.setItem(item9);
+//        pictureRepository.save(picture9);
+//
+//        // item 10
+//        Picture picture10 = new Picture();
+//        picture10.setName("BMW M3");
+//        picture10.setUrl("https://www.tuningblog.eu/wp-content/uploads/2021/03/BMW-M3-Touring-G81-Competition-Widebody-Tuning-1.jpg");
+//        picture10.setItem(item10);
+//        pictureRepository.save(picture10);
+
+    }
+
+    public byte[] convert (String filePath) throws Exception {
+        BufferedImage bImage = ImageIO.read(new java.io.File(filePath));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "jpg", bos);
+        return bos.toByteArray();
+    }
+
+}

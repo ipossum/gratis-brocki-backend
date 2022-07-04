@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.domain;
 
 import lombok.Getter;
@@ -30,3 +31,4 @@ public class Picture extends BaseEntity {
     private Item item;
 
 }
+*/

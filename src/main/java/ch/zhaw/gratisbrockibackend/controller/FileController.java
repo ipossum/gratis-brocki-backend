@@ -1,7 +1,7 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
 import ch.zhaw.gratisbrockibackend.domain.File;
-import ch.zhaw.gratisbrockibackend.dto.FileDto;
+import ch.zhaw.gratisbrockibackend.dto.FileResponseDto;
 import ch.zhaw.gratisbrockibackend.mapper.FileMapper;
 import ch.zhaw.gratisbrockibackend.service.FileService;
 import lombok.AllArgsConstructor;
@@ -25,16 +25,16 @@ public class FileController {
 
     /**
      * Method that takes a file sent as a MultipartFile, sends it onwards to FileService
-     * and returns it as a converted FileDto
+     * and returns it as a converted FileResponseDto
      * Testing via Postman: send as "form-data" with key "file" and the actual file as "value"
      *
      * @param dbFile the file as MultipartFile
      * @throws IOException throw regular IOException
      */
     @PostMapping
-    public FileDto uploadNewFile (@RequestParam("file") MultipartFile dbFile) throws IOException {
+    public FileResponseDto uploadNewFile (@RequestParam("file") MultipartFile dbFile) throws IOException {
         File file = fileService.storeFile(dbFile);
-        FileDto fileDto = fileMapper.toFileDto(file);
+        FileResponseDto fileResponseDto = fileMapper.toFileResponseDto(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
@@ -42,10 +42,10 @@ public class FileController {
                 .path(file.getId().toString())
                 .toUriString();
 
-        fileDto.setUrl(fileDownloadUri);
-        fileDto.setSize(dbFile.getSize());
+        fileResponseDto.setUrl(fileDownloadUri);
+        fileResponseDto.setSize(dbFile.getSize());
 
-        return fileDto;
+        return fileResponseDto;
     }
 
     @GetMapping("/{id}")
@@ -54,14 +54,14 @@ public class FileController {
     }
 
     @GetMapping
-    public List<FileDto> getFiles() {
+    public List<FileResponseDto> getFiles() {
         return fileService.getAllFiles().map(file -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/api/v1/files/")
                     .path(file.getId().toString())
                     .toUriString();
-            return new FileDto(
+            return new FileResponseDto(
                     file.getFilename(),
                     fileDownloadUri,
                     file.getFiletype(),

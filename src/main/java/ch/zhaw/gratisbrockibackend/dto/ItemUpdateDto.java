@@ -17,6 +17,6 @@ public class ItemUpdateDto {
     private int zipCode;
     private Category category;
     private Condition condition;
-    private List<PictureDto> pictures;
+    private List<FileDto> pictures;
 
 }

@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.repository;
 
 import ch.zhaw.gratisbrockibackend.domain.Picture;
@@ -68,3 +69,4 @@ public class PictureRepositoryTests {
     }
 
 }
+*/

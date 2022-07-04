@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.service;
 
 import ch.zhaw.gratisbrockibackend.domain.Picture;
@@ -39,4 +40,4 @@ public class PictureService {
         pictureValidator.exists(id);
         pictureRepository.deleteById(id);
     }
-}
+}*/

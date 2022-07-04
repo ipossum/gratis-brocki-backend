@@ -41,7 +41,7 @@ public class Item extends BaseEntity {
     private User owner;
 
     @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
-    private List<Picture> pictures;
+    private List<File> pictures;
 
     /* Commented out, because it is not yet used
     @OneToMany (mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)

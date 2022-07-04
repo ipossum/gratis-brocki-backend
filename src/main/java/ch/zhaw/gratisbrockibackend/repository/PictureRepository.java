@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.repository;
 
 import ch.zhaw.gratisbrockibackend.domain.Picture;
@@ -10,3 +11,4 @@ public interface PictureRepository extends JpaRepository<Picture, Long>, JpaSpec
 
     Picture findPictureById(Long id);
 }
+*/

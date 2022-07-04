@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.dto;
 
 
@@ -12,3 +13,4 @@ public class PictureUpdateDto {
     private String url;
 
 }
+*/

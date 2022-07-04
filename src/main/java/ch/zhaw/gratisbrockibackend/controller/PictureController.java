@@ -1,3 +1,4 @@
+/*
 package ch.zhaw.gratisbrockibackend.controller;
 
 import ch.zhaw.gratisbrockibackend.domain.Picture;
@@ -44,4 +45,4 @@ public class PictureController {
     public void deletePicture(@PathVariable("id") Long id) {
         pictureService.deletePicture(id);
     }
-}
+}*/

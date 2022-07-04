@@ -41,7 +41,7 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(apiException, badRequest);
     }
 
-    @ExceptionHandler(PictureException.class)
+    /*@ExceptionHandler(PictureException.class)
     public ResponseEntity<Object> handlePictureException (PictureException e) {
         HttpStatus badRequest = HttpStatus.BAD_REQUEST;
 
@@ -51,7 +51,7 @@ public class ApiExceptionHandler {
                 OffsetDateTime.now()
         );
         return new ResponseEntity<>(apiException, badRequest);
-    }
+    }*/
 
     @ExceptionHandler(FileException.class)
     public ResponseEntity<Object> handleFileException (FileException e) {
