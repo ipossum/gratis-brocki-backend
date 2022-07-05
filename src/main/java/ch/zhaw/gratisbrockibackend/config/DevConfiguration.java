@@ -48,8 +48,8 @@ public class DevConfiguration implements HasLogger {
     public void test() throws Exception {
         createUserData();
         createItemData(userRepository.findUserById(1L), userRepository.findUserById(2L), userRepository.findUserById(3L), userRepository.findUserById(4L));
-        createImageData(itemRepository.findItemById(1L), itemRepository.findItemById(2L), itemRepository.findItemById(3L), itemRepository.findItemById(4L), itemRepository.findItemById(5L), itemRepository.findItemById(6L), itemRepository.findItemById(7L), itemRepository.findItemById(8L), itemRepository.findItemById(9L), itemRepository.findItemById(10L));
-        // createPictureData(itemRepository.findItemById(1L), itemRepository.findItemById(2L), itemRepository.findItemById(3L), itemRepository.findItemById(4L), itemRepository.findItemById(5L), itemRepository.findItemById(6L), itemRepository.findItemById(7L), itemRepository.findItemById(8L), itemRepository.findItemById(9L), itemRepository.findItemById(10L));
+//        createImageData(itemRepository.findItemById(1L), itemRepository.findItemById(2L), itemRepository.findItemById(3L), itemRepository.findItemById(4L), itemRepository.findItemById(5L), itemRepository.findItemById(6L), itemRepository.findItemById(7L), itemRepository.findItemById(8L), itemRepository.findItemById(9L), itemRepository.findItemById(10L));
+//        createPictureData(itemRepository.findItemById(1L), itemRepository.findItemById(2L), itemRepository.findItemById(3L), itemRepository.findItemById(4L), itemRepository.findItemById(5L), itemRepository.findItemById(6L), itemRepository.findItemById(7L), itemRepository.findItemById(8L), itemRepository.findItemById(9L), itemRepository.findItemById(10L));
     }
 
     private void createUserData() {
@@ -252,13 +252,13 @@ public class DevConfiguration implements HasLogger {
 
     private void createImageData(Item item1, Item item2, Item item3, Item item4, Item item5, Item item6, Item item7, Item item8, Item item9, Item item10) throws Exception {
 
-        // item 1
-        File picture1 = new File();
-        picture1.setFilename("Steuerrechnung");
-        picture1.setFiletype("image/jpeg");
-        picture1.setData(convert("src/main/resources/samples/Steuerrechnung.jpg"));
-        picture1.setItem(item1);
-        fileRepository.save(picture1);
+//        // item 1
+//        File picture1 = new File();
+//        picture1.setFilename("Steuerrechnung");
+//        picture1.setFiletype("image/jpeg");
+//        picture1.setData(convert("src/main/resources/samples/Steuerrechnung.jpg"));
+//        picture1.setItem(item1);
+//        fileRepository.save(picture1);
 
 //        // item 2
 //        Picture picture2 = new Picture();
