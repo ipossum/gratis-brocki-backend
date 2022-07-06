@@ -48,7 +48,7 @@ public class DevConfiguration implements HasLogger {
         user1.setUsername("Jackass");
         user1.setEmail("user@tmail.ch");
         user1.setPhoneNumber("0779483928");
-        user1.setPassword("qwertz@1234");
+        user1.setPassword("$2a$10$xj1gmVzipb6c0U5qOeuVwOss2VOqzZ8EuOwP7Bajq1TPUKaFuELtO");
         userRepository.save(user1);
 
         User user2 = new User();
