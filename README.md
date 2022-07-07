@@ -9,7 +9,7 @@ A platform that can be freely used by everyone to share or to give away all kind
 GratisBrocki was developed as part of a student project on object-oriented programming.
 We hope you enjoy it. We did :-)
 
-Go [here](https://github.com/ipossum/gratis-brocki-frontend) to find our frontend repository.
+Go [here](https://github.com/ipossum/gratis-brocki-final-frontend) to find our frontend repository.
 
 ## Installation
 
@@ -21,7 +21,7 @@ Just copy the link from git and paste it into Idea.
 There are different ways to use this application. When you just using the 
 backend the only way to interact with the backend is to use postman. If you 
 want to enjoy the full package you have to use the frontend additionally. 
-You will find it [here](https://github.com/ipossum/gratis-brocki-frontend)
+You will find it [here](https://github.com/ipossum/gratis-brocki-final-frontend)
 
 ## Contributing
 
