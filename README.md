@@ -19,25 +19,17 @@ Just copy the link from git and paste it into IDEA.
 ## Usage
 
 There are different ways to use this application. When just using the 
-backend, the only way to interact with the backend via its API (e.g. using Postman). If you 
+backend, the only way to interact with the backend is via its API (e.g. using Postman). If you 
 want to enjoy the full package, you have to use the frontend additionally. 
 You can find it [here](https://github.com/ipossum/gratis-brocki-final-frontend).
 
-## Contributing
-
-* Fork it!
-* Create your feature branch: `git checkout -b fb-description`
-* Commit your changes: `git commit -am 'Add some feature'`
-* Push to the branch: `git push origin fb-description`
-* Submit a pull request!
-
-## Description/Documentation
+## Documentation
 
 The backend currently uses an H2 database. The database holds data about users,
 items, pictures and messages. So far User, Item and Picture are implemented in 
 the code and can be manipulated via the API.
 
-## APIs
+### APIs
 
 The following APIs are available for users:
 * POST api/v1/users --> register a new user
@@ -59,7 +51,7 @@ The following APIs are available for pictures:
 * PUT api/v1/pictures/{id} --> adjust data of a specific picture
 * DELETE api/v1/pictures/{id} --> delete a specific picture
 
-## Request-Body
+### Request Body
 
 For the POST and PUT methods a request-body is sent with the request. These are composed as follows.
 
@@ -78,8 +70,8 @@ For the POST and PUT methods a request-body is sent with the request. These are 
     "title": "title of the item",
     "description": "description of the item you want to give away",
     "zipCode": "9014",
-    "category": "Category.SPORT",
-    "condition": "Condition.USED",
+    "category": "SPORT",
+    "condition": "USED",
     "owner": 1
 }
 ```
@@ -92,6 +84,14 @@ For the POST and PUT methods a request-body is sent with the request. These are 
     "item": 1 
 }
 ```
+
+## Contributing
+
+* Fork it!
+* Create your feature branch: `git checkout -b fb-description`
+* Commit your changes: `git commit -am 'Add some feature'`
+* Push to the branch: `git push origin fb-description`
+* Submit a pull request!
 
 ## Caution!
 
