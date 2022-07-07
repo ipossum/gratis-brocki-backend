@@ -49,12 +49,15 @@ public class ItemValidator { // TODO: add additional, more sophisticated plausib
 
     private void commonPlausibilityCheck(String title, String description, int zipCode, Category category, Condition condition) throws ItemException {
         if (title == null
-                || title.length() < 3) {
-            throw new ItemException("Invalid title — make sure minimum length is 3 characters");
+                || title.length() < 3
+                || title.length() > 50) {
+            throw new ItemException("Invalid title — make sure length is between 3 and 50 characters");
         }
+
         if (description == null
-                || description.length() <= 10) {
-            throw new ItemException("Invalid description — make sure minimum length is 10 characters");
+                || description.length() <= 10
+                || description.length() > 1200) {
+            throw new ItemException("Invalid description — make sure length is between 10 and 1200 characters");
         }
 
         if (zipCode < 1000
@@ -69,5 +72,30 @@ public class ItemValidator { // TODO: add additional, more sophisticated plausib
         if (condition == null) {
             throw new ItemException("Invalid condition");
         }
+
+        /*if (!checkCategory(category)) {
+            throw new ItemException("Invalid category - no match in category found");
+        }
+
+        if (!checkCondition(condition)) {
+            throw new ItemException("Invalid condition - no match in condition found");
+        }*/
+
+    }
+
+    private boolean checkCategory(Category category) {
+        boolean match = false;
+        for (Category value : Category.values()) {
+            match = category.equals(value);
+        }
+        return match;
+    }
+
+    private boolean checkCondition(Condition condition) {
+        boolean match = false;
+        for (Condition value : Condition.values()) {
+            match = condition.equals(value);
+        }
+        return match;
     }
 }

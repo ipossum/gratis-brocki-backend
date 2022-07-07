@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @ToString
 @Getter
@@ -14,10 +14,10 @@ import java.util.Set;
 @Entity
 public class User extends BaseEntity {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 40, unique = true)
     private String username;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, length = 60, unique = true)
 	private String email;
 
     @Column
@@ -36,9 +36,8 @@ public class User extends BaseEntity {
 
 	public boolean enabled;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
-    private Set<Item> items;
-
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
+    private List<Item> items;
 
     public User() {
         super();
