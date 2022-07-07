@@ -43,5 +43,9 @@ public class User extends BaseEntity {
     public User() {
         super();
         this.role = Role.USER;
+        this.enabled = true;
+        this.accountNonLocked = true;
+        this.credentialsNonExpired = true;
+        this.accountNonExpired = true;
 	}
 }

@@ -13,6 +13,7 @@ import ch.zhaw.gratisbrockibackend.utils.HasLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
 
@@ -32,6 +33,9 @@ public class DevConfiguration implements HasLogger {
     @Autowired
     PictureRepository pictureRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public DevConfiguration() {
         getLogger().info("DevConfiguration Class");
     }
@@ -48,14 +52,14 @@ public class DevConfiguration implements HasLogger {
         user1.setUsername("Jackass");
         user1.setEmail("user@me.to");
         user1.setPhoneNumber("066 333 55 00");
-        user1.setPassword("123456");
+        user1.setPassword(passwordEncoder.encode("123456"));
         userRepository.save(user1);
 
         User user2 = new User();
         user2.setUsername("Hans");
         user2.setEmail("who@me.to");
         user2.setPhoneNumber("033 222 77 99");
-        user2.setPassword("qwertz");
+        user2.setPassword(passwordEncoder.encode("qwertz"));
         userRepository.save(user2);
     }
 
