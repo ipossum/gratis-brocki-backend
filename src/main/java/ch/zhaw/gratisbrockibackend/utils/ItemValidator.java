@@ -11,6 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+/**
+ * Some basic checks to make sure items are properly defined
+ */
 @AllArgsConstructor
 @Setter
 @Getter

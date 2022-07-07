@@ -7,6 +7,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
+/**
+ * Base class for all entities
+ */
+
 @Getter
 @Setter
 @MappedSuperclass

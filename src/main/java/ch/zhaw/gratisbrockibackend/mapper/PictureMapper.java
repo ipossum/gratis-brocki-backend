@@ -12,6 +12,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface PictureMapper {
 
+    // Attribute 'itemId' is directly mapped to the attribute 'id' of 'item' (of type 'Item')
     @Mapping(target = "itemId", source = "item.id")
     PictureDto toPictureDto(Picture picture);
 

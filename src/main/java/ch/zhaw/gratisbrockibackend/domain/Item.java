@@ -11,6 +11,10 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Entity that holds an item of a user
+ */
+
 @NoArgsConstructor
 @ToString
 @Getter
@@ -39,8 +43,10 @@ public class Item extends BaseEntity {
     @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
     private List<Picture> pictures;
 
-    //@OneToMany (mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
-    //private List<Message> messages;
+    /* Commented out, because it is not yet used
+    @OneToMany (mappedBy = "item", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.REMOVE)
+    private List<Message> messages;
+    */
 
 }
 

@@ -19,6 +19,8 @@ public class ItemDto {
     private Condition condition;
     private Long userId;
     private List<PictureDto> pictures;
+
+    // Commented out, because it is not yet used
     //private List<MessageDto> messages;
 
 }

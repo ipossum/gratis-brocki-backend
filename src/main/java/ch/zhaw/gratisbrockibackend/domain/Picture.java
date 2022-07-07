@@ -9,6 +9,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+/**
+ * Entity that holds a picture of an item
+ */
+
 @NoArgsConstructor
 @ToString
 @Getter

@@ -9,6 +9,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+/**
+ * Some basic checks to make sure pictures are properly defined
+ */
+
 @AllArgsConstructor
 @Setter
 @Getter

@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.OffsetDateTime;
 
+/**
+ * Handles all custom-made exceptions
+ * With the current setup, these exceptions may be handled differently
+ */
+
 @ControllerAdvice
 public class ApiExceptionHandler {
 

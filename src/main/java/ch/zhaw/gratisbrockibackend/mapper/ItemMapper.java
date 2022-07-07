@@ -9,10 +9,11 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
 
+    // Attribute 'userId' is directly mapped to the attribute 'id' of 'owner' (of type 'User')
     @Mapping(target = "userId", source = "owner.id")
     ItemDto toItemDto (Item item);
 
-    //TODO --> andy
+    // @Mapping to specifically ignore attributes that have no counterparts
     @Mapping(target = "owner.id", source = "userId")
     @Mapping(target = "owner", ignore = true)
     //@Mapping(target = "messages", ignore = true)
