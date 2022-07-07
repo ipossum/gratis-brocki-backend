@@ -1,7 +1,9 @@
 package ch.zhaw.gratisbrockibackend.service;
 
 import ch.zhaw.gratisbrockibackend.domain.File;
+import ch.zhaw.gratisbrockibackend.domain.Item;
 import ch.zhaw.gratisbrockibackend.repository.FileRepository;
+import ch.zhaw.gratisbrockibackend.repository.ItemRepository;
 import ch.zhaw.gratisbrockibackend.utils.FileValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,17 +16,23 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 @Service
 public class FileService {
+
+    private final ItemRepository itemRepository;
+
     private FileRepository fileRepository;
 
     private final FileValidator fileValidator;
 
-    public File storeFile (MultipartFile multipartFile) throws IOException {
+    public File storeFile (MultipartFile multipartFile, Long itemId) throws IOException {
         fileValidator.plausibilityCheck(multipartFile);
         String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
         File file = new File();
         file.setFilename(filename);
         file.setFiletype(multipartFile.getContentType());
         file.setData(multipartFile.getBytes());
+        file.setItem(itemRepository.getById(itemId));
+
         return fileRepository.save(file);
     }
 

@@ -1,6 +1,7 @@
 package ch.zhaw.gratisbrockibackend.controller;
 
 import ch.zhaw.gratisbrockibackend.domain.File;
+import ch.zhaw.gratisbrockibackend.dto.FileDto;
 import ch.zhaw.gratisbrockibackend.dto.FileResponseDto;
 import ch.zhaw.gratisbrockibackend.mapper.FileMapper;
 import ch.zhaw.gratisbrockibackend.service.FileService;
@@ -33,7 +34,7 @@ public class FileController {
      */
     @PostMapping
     public FileResponseDto uploadNewFile (@RequestParam("file") MultipartFile dbFile) throws IOException {
-        File file = fileService.storeFile(dbFile);
+        File file = fileService.storeFile(dbFile, 1L); // TODO: this method should receive the correct itemId ("1L" as placeholder)
         FileResponseDto fileResponseDto = fileMapper.toFileResponseDto(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder
@@ -49,8 +50,8 @@ public class FileController {
     }
 
     @GetMapping("/{id}")
-    public File getFile(@PathVariable Long id) {
-        return fileService.getFile(id);
+    public FileDto getFile(@PathVariable Long id) {
+        return fileMapper.toFileDto(fileService.getFile(id));
     }
 
     @GetMapping
