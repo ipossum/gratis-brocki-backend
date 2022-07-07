@@ -1,6 +1,6 @@
 # GratisBrocki
 
-A platform that can be freely used by everyone to share or to give away all kinds of things for free. Some of the main goals are
+A platform that can be freely used by everyone to share or give away all kinds of things for free. Some of the main goals are
 * to make sustainable resource use easier
 * to help transition to a minimalist lifestyle
 * to facilitate giving and sharing without financial motives
@@ -13,15 +13,15 @@ Go [here](https://github.com/ipossum/gratis-brocki-final-frontend) to find our f
 
 ## Installation
 
-Use Project from Version Control in your IntelliJ Idea. 
-Just copy the link from git and paste it into Idea.
+Use Project from Version Control in your IntelliJ IDEA. 
+Just copy the link from git and paste it into IDEA.
 
 ## Usage
 
-There are different ways to use this application. When you just using the 
-backend the only way to interact with the backend is to use postman. If you 
-want to enjoy the full package you have to use the frontend additionally. 
-You will find it [here](https://github.com/ipossum/gratis-brocki-final-frontend)
+There are different ways to use this application. When just using the 
+backend, the only way to interact with the backend via its API (e.g. using Postman). If you 
+want to enjoy the full package, you have to use the frontend additionally. 
+You can find it [here](https://github.com/ipossum/gratis-brocki-final-frontend).
 
 ## Contributing
 
@@ -33,95 +33,65 @@ You will find it [here](https://github.com/ipossum/gratis-brocki-final-frontend)
 
 ## Description/Documentation
 
-The backend accesses an H2 database. The database holds data about users,
+The backend currently uses an H2 database. The database holds data about users,
 items, pictures and messages. So far User, Item and Picture are implemented in 
 the code and can be manipulated via the API.
 
 ## APIs
 
 The following APIs are available for users:
-
 * POST api/v1/users --> register a new user
-
-* GET api/v1/users/{id} --> load a specific user from database
-
+* GET api/v1/users/{id} --> load a specific user from the database
 * PUT api/v1/users/{id} --> adjust data of a specific user
-
 * DELETE api/v1/users/{id} --> delete specific user
 
-
-
 The following APIs are available for items:
-
 * POST api/v1/items --> load a new item into database
-
 * GET api/v1/items/{id} --> load specific item from database
-
 * GET api/v1/items/all --> load all items from database
-
 * GET api/v1/items/ --> load items using filter
-
 * PUT api/v1/items/{id} --> adjust data of a specific item
-
 * DELETE api/v1/items/{id} --> delete specific item
 
 The following APIs are available for pictures:
-
 * POST api/v1/pictures --> load a new picture into the database
-
 * GET api/v1/pictures --> load pictures using filters
-
 * PUT api/v1/pictures/{id} --> adjust data of a specific picture
-
 * DELETE api/v1/pictures/{id} --> delete a specific picture
 
 ## Request-Body
 
-For the POST and PUT methods a request-body is given to the request. These are composed as follows.
+For the POST and PUT methods a request-body is sent with the request. These are composed as follows.
 
 * User:
-
+```
 {
-
-    "username": "TestUser", 
-
-    "email": "test@test.ch", 
-
-    "phoneNumber": "0793940283", 
-
-    "password": "qwertz@1234" 
-
+    "username": "TestUser",
+    "email": "test@test.ch",
+    "phoneNumber": "0793940283",
+    "password": "qwertz@1234"
 }
-
+```
 * Item:
-
+```
 {
-
-    "title": "title of the item", 
-
-    "description": "description of the item you want to give away", 
-
-    "zipCode": "9014", 
-
-    "category": "Category.SPORT", 
-
-    "condition": "Condition.USED", 
-
-    "owner": 1 
-
+    "title": "title of the item",
+    "description": "description of the item you want to give away",
+    "zipCode": "9014",
+    "category": "Category.SPORT",
+    "condition": "Condition.USED",
+    "owner": 1
 }
+```
 
 * Pictures:
-
+```
 {
-
     "name": "name-of-picture", 
-
-    }, "url": "https://www.meinBild.ch/img/fahrrad-rot.jpg", 
-
+    "url": "https://www.meinBild.ch/img/fahrrad-rot.jpg", 
     "item": 1 
-
 }
+```
 
 ## Caution!
 
