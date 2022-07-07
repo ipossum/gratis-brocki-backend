@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 /**
  * View Model object for storing a user's credentials.
  */
+
 @Getter
 @Setter
 public class LoginDto {
