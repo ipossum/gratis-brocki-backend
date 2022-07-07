@@ -43,7 +43,7 @@ public final class TokenHandler {
         Date now = new Date();
         Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
         claims.put("roles", userDetails.getAuthorities());
-        Date expiration = new Date(now.getTime() + TimeUnit.HOURS.toMillis(10l));
+        Date expiration = new Date(now.getTime() + TimeUnit.HOURS.toMillis(10L));
         return Jwts.builder()
                 .setId(UUID.randomUUID().toString())
                 .setSubject(userDetails.getUsername())

@@ -23,7 +23,7 @@ public class PictureService {
     }
 
     public Page<Picture> getPictures (Specification<Picture> spec, Pageable page){
-        // TODO: add some validation (e.g. disallow anything but userId in specification?)
+
         return pictureRepository.findAll(spec, page);
     }
 

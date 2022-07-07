@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @Getter
 @Component
-public class PictureValidator { // TODO: add additional, more sophisticated plausibility checks (e.g. DTO correctly formed?)
+public class PictureValidator {
 
     PictureRepository pictureRepository;
 

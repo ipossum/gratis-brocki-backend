@@ -34,9 +34,9 @@ public class WebSecurityConfig  {
     private final TokenAuthenticationService tokenAuthenticationService;
 
    @Autowired
-   public WebSecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
-                            @Value("${hellorest.auth.secret:secretkey}") String secretKey,
-                            @Value("${hellorest.auth.headername:xauth}") TokenAuthenticationService.AuthHeaderName  authHeaderName) {
+   public WebSecurityConfig(@Qualifier("appUserDetailsServiceImpl") UserDetailsService userDetailsService,
+                            @Value("${gratisbrocki.auth.secret:secretkey}") String secretKey,
+                            @Value("${gratisbrocki.auth.headername:xauth}") TokenAuthenticationService.AuthHeaderName  authHeaderName) {
 
      //   super(true);
         this.userDetailsService = userDetailsService;
@@ -61,13 +61,13 @@ public class WebSecurityConfig  {
                     .and().servletApi()
                     .and().headers().cacheControl();
 
-            http.antMatcher("/api/v1//**").authorizeRequests()
-                    .antMatchers("/api/v1/login", "/api/v1/authenticate").permitAll()
-                    .antMatchers("/api/v1/users/**").hasAnyRole("USER", "ADMIN")
+            http.antMatcher("/api/**").authorizeRequests()
+                    .antMatchers("/api/login", "/api/authenticate").permitAll()
+                    .antMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")
                     .antMatchers(HttpMethod.GET, "/h2-console/**").permitAll();
 
             http.addFilterBefore(
-                    new StatelessLoginFilter("/api/v1/login", tokenAuthenticationService, userDetailsService, authenticationManager()),
+                    new StatelessLoginFilter("/api/login", tokenAuthenticationService, userDetailsService, authenticationManager()),
                     UsernamePasswordAuthenticationFilter.class);
 
             http.addFilterBefore(

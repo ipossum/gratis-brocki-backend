@@ -28,9 +28,6 @@ public class DevConfiguration implements HasLogger {
     ItemRepository itemRepository;
 
     @Autowired
-    MessageRepository messageRepository;
-
-    @Autowired
     PictureRepository pictureRepository;
 
     @Autowired
@@ -59,21 +56,21 @@ public class DevConfiguration implements HasLogger {
         user2.setUsername("Hans");
         user2.setEmail("who@tmail.ch");
         user2.setPhoneNumber("0784950294");
-        user2.setPassword(passwordEncoder.encode("qwertz"));
+        user2.setPassword(passwordEncoder.encode("qwertz@6789"));
         userRepository.save(user2);
 
         User user3 = new User();
         user3.setUsername("Claudia");
         user3.setEmail("claudia@tmail.ch");
         user3.setPhoneNumber("0794568329");
-        user2.setPassword(passwordEncoder.encode("qwertz"));
+        user3.setPassword(passwordEncoder.encode("zuiop#4567"));
         userRepository.save(user3);
 
         User user4 = new User();
         user4.setUsername("Pia");
         user4.setEmail("pia.eugster@mymail.ch");
         user4.setPhoneNumber("0769407382");
-        user2.setPassword(passwordEncoder.encode("qwertz"));
+        user4.setPassword(passwordEncoder.encode("asdfg@4567"));
         userRepository.save(user4);
 
     }

@@ -32,8 +32,8 @@ public class JwtAuthenticationController {
     private final AuthenticationManager authenticationManagerBean;
 
     public JwtAuthenticationController(@Qualifier("appUserDetailsServiceImpl") UserDetailsService userDetailsService,
-                                       @Value("${hellorest.auth.headername:xauth}") TokenAuthenticationService.AuthHeaderName  authHeaderName,
-                                       @Value("${hellorest.auth.secret:secretkey}") String secretKey,
+                                       @Value("${gratisbrocki.auth.headername:xauth}") TokenAuthenticationService.AuthHeaderName  authHeaderName,
+                                       @Value("${gratisbrocki.auth.secret:secretkey}") String secretKey,
                                        AuthenticationManager authenticationManagerBean) {
 
         this.tokenAuthenticationService = new TokenAuthenticationService(authHeaderName, secretKey, userDetailsService);

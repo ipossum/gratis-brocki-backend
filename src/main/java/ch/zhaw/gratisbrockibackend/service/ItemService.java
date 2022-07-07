@@ -21,7 +21,7 @@ public class ItemService {
     private final ItemValidator itemValidator;
 
     public Page<Item> getItems (Specification<Item> spec, Pageable page){
-        // TODO: add some validation (e.g. make sure not all items are returned, but only the first page as default!)
+
         return itemRepository.findAll(spec, page);
     }
 

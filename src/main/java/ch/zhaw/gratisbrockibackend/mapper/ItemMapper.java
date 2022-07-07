@@ -12,6 +12,7 @@ public interface ItemMapper {
     @Mapping(target = "userId", source = "owner.id")
     ItemDto toItemDto (Item item);
 
+    //TODO --> andy
     @Mapping(target = "owner.id", source = "userId")
     @Mapping(target = "owner", ignore = true)
     //@Mapping(target = "messages", ignore = true)

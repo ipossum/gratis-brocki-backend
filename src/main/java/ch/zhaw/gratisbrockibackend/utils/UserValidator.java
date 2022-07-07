@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 @Setter
 @Getter
 @Component
-public class UserValidator { // TODO: add additional, more sophisticated plausibility checks (e.g. DTO correctly formed?)
+public class UserValidator {
 
     private static final int MIN_LENGTH_PASSWORD = 8;
     private static final int MAX_LENGTH_PASSWORD = 40;
