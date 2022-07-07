@@ -13,6 +13,7 @@ import ch.zhaw.gratisbrockibackend.utils.HasLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
 
@@ -32,6 +33,9 @@ public class DevConfiguration implements HasLogger {
     @Autowired
     PictureRepository pictureRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public DevConfiguration() {
         getLogger().info("DevConfiguration Class");
     }
@@ -46,16 +50,18 @@ public class DevConfiguration implements HasLogger {
     private void createUserData() {
         User user1 = new User();
         user1.setUsername("Jackass");
-        user1.setEmail("user@tmail.ch");
-        user1.setPhoneNumber("0779483928");
-        user1.setPassword("$2a$10$xj1gmVzipb6c0U5qOeuVwOss2VOqzZ8EuOwP7Bajq1TPUKaFuELtO");
+        feature-security-fix-mbach
+        user1.setEmail("user@me.to");
+        user1.setPhoneNumber("066 333 55 00");
+        user1.setPassword(passwordEncoder.encode("123456"));
         userRepository.save(user1);
 
         User user2 = new User();
         user2.setUsername("Hans");
-        user2.setEmail("who@tmail.ch");
-        user2.setPhoneNumber("0784950294");
-        user2.setPassword("zuiop@6789");
+        feature-security-fix-mbach
+        user2.setEmail("who@me.to");
+        user2.setPhoneNumber("033 222 77 99");
+        user2.setPassword(passwordEncoder.encode("qwertz"));
         userRepository.save(user2);
 
         User user3 = new User();
