@@ -34,7 +34,7 @@ public class DevConfiguration implements HasLogger {
     PictureRepository pictureRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     public DevConfiguration() {
         getLogger().info("DevConfiguration Class");
@@ -50,17 +50,15 @@ public class DevConfiguration implements HasLogger {
     private void createUserData() {
         User user1 = new User();
         user1.setUsername("Jackass");
-        feature-security-fix-mbach
-        user1.setEmail("user@me.to");
-        user1.setPhoneNumber("066 333 55 00");
+        user1.setEmail("user@tmail.ch");
+        user1.setPhoneNumber("0779483928");
         user1.setPassword(passwordEncoder.encode("123456"));
         userRepository.save(user1);
 
         User user2 = new User();
         user2.setUsername("Hans");
-        feature-security-fix-mbach
-        user2.setEmail("who@me.to");
-        user2.setPhoneNumber("033 222 77 99");
+        user2.setEmail("who@tmail.ch");
+        user2.setPhoneNumber("0784950294");
         user2.setPassword(passwordEncoder.encode("qwertz"));
         userRepository.save(user2);
 
@@ -68,14 +66,14 @@ public class DevConfiguration implements HasLogger {
         user3.setUsername("Claudia");
         user3.setEmail("claudia@tmail.ch");
         user3.setPhoneNumber("0794568329");
-        user3.setPassword("asdf#098");
+        user2.setPassword(passwordEncoder.encode("qwertz"));
         userRepository.save(user3);
 
         User user4 = new User();
         user4.setUsername("Pia");
         user4.setEmail("pia.eugster@mymail.ch");
         user4.setPhoneNumber("0769407382");
-        user4.setPassword("fghj@#567");
+        user2.setPassword(passwordEncoder.encode("qwertz"));
         userRepository.save(user4);
 
     }
